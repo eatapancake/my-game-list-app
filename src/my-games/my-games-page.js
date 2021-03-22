@@ -1,7 +1,11 @@
 import React from "react";
 
 function MyGamesPage() {
-  return <div>My Games 🎲</div>;
+  return (
+    <div>
+      <h1>My Games 🎲</h1>
+    </div>
+  );
 }
 
 export default MyGamesPage;
