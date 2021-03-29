@@ -3,6 +3,7 @@ import PageHeader from "./common/page-header.js";
 import HomePage from "./home/home-page.js";
 import AllGamesPage from "./all-games/all-games-page.js";
 import MyGamesPage from "./my-games/my-games-page.js";
+import AddGame from "./my-games/add-game.js";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         </Route>
         <Route path="/my-games">
           <MyGamesPage />
+        </Route>
+        <Route path="/add-game">
+          <AddGame />
         </Route>
       </Switch>
     </BrowserRouter>

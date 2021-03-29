@@ -1,3 +1,6 @@
+import React from "react";
+import { useHistory } from "react-router-dom";
+
 const genres = [
   "Action-adventure",
   "Multiplayer online battle arena (MOBA)",
@@ -20,6 +23,7 @@ const genresListItems = genres.map((genre, i) => (
   </div>
 ));
 function AddGame() {
+  const history = useHistory();
   return (
     <div>
       <h1>My Games 🎲</h1>
@@ -30,6 +34,10 @@ function AddGame() {
             Title:
             <input type="text" value="Enter title here" checked={true} />
           </label>
+          <label>
+            Release Year:
+            <input type="text" value="Enter Release Year" checked={true} />
+          </label>
         </div>
         <div>
           Genre
@@ -37,8 +45,20 @@ function AddGame() {
         </div>
         <div>
           <label>
-            Rating:
-            <input type="text" value="name" checked={false} />
+            Summary:
+            <textarea value="Type as much or as little as you'd like" />{" "}
+          </label>
+        </div>
+        <div>
+          <label>
+            Developer:
+            <input type="text" value="Enter Developers" checked={true} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Platform:
+            <input type="text" value="Enter Platform" checked={true} />
           </label>
         </div>
         <div>
@@ -48,6 +68,8 @@ function AddGame() {
           </label>
         </div>
       </form>
+      <button onClick={() => history.push(`/my-games`)}>Cancel</button>
+      <button>Save</button>
     </div>
   );
 }
