@@ -1,28 +1,23 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-
-// const Axios = () => {
-//   const [game, setGames] = useState([]);
-
-//   useEffect(() => {
-//     axios.get(`/api/game/3030-79087/?api_key=dc2056c71aa4a38a1452d90cfca7194e4dd23b31
-//         `);
-//   });
-// };
+import { useEffect } from "react";
+// import axios from "axios";
 
 function GameFetch() {
+  let headers = new Headers({
+    "User-Agent": "Team 4's App Project",
+  });
+
   useEffect(() => {
     async function main() {
       console.log("Fetch initiated..! 🦴");
       try {
-        // axios.get(`/api/game/3030-79087/?api_key=dc2056c71aa4a38a1452d90cfca7194e4dd23b31
-        // `);
-
-        const url =
-          "https://www.giantbomb.com/api/game/3030-79087/?api_key=dc2056c71aa4a38a1452d90cfca7194e4dd23b31";
+        // const url =
+        //   "https://www.giantbomb.com/api/game/3030-79087/?api_key=dc2056c71aa4a38a1452d90cfca7194e4dd23b31";
         // const response = await fetch(url, { mode: `no-cors` });
-        const response = await fetch(url);
-        console.log(response);
+        // const payload = "";
+        const url2 = "https://api.rawg.io/api/games";
+        const response = await fetch(url2, { method: `GET`, headers: headers });
+        const json = await response.json();
+        console.log(json);
       } catch (err) {
         console.log("An error has occured!! D:");
         console.error(err);

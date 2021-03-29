@@ -5,6 +5,7 @@ import GameListing from "./game-listing";
 import GameList from "./game-list";
 import AddGame from "./add-game";
 import { useHistory } from "react-router-dom";
+import TestPage from "../test/test-page";
 
 function MyGamesPage() {
   const history = useHistory();
@@ -57,6 +58,7 @@ function MyGamesPage() {
       <button onClick={() => history.push(`/add-game`)}>Add New Game</button>
       <GameList />
       {/* <GameListing gameData={gameData} /> */}
+      <TestPage />
     </div>
   );
 }
