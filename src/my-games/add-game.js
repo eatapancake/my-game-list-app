@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 const genres = [
@@ -14,16 +14,53 @@ const genres = [
   "Survival and horror",
 ];
 
-const genresListItems = genres.map((genre, i) => (
-  <div>
-    <label>
-      <input type="radio" value={genre} checked={false} />
-      {genre}
-    </label>
-  </div>
-));
 function AddGame() {
+  const [title, setTitle] = useState("Enter Game Title");
+  const [year, setYear] = useState(2000);
+  const [genre, setGenre] = useState("Action-adventure");
+  const [summary, setSummary] = useState(
+    "Type as much or as little as you'd like"
+  );
+  const [developer, setDeveloper] = useState();
+  const [platform, serPlatform] = useState();
+  const [review, setReview] = useState(
+    "Type as much or as little as you'd like"
+  );
+
   const history = useHistory();
+
+  const OnTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+  const OnYearChange = (event) => {
+    setYear(event.target.value);
+  };
+  const onGenreChange = (event) => {
+    setGenre(event.target.value);
+  };
+  const onSummaryChange = (event) => {
+    setSummary(event.target.value);
+  };
+
+  const onReviewChange = (event) => {
+    setReview(event.target.value);
+  };
+
+  const genresListItems = genres.map((item, i) => (
+    <div>
+      <label>
+        <input
+          type="radio"
+          value={item}
+          onChange={onGenreChange}
+          id={i}
+          checked={genre === item}
+        />
+        {item}
+      </label>
+    </div>
+  ));
+
   return (
     <div>
       <h1>My Games 🎲</h1>
@@ -31,12 +68,11 @@ function AddGame() {
         <h2>Add new game</h2>
         <div>
           <label>
-            Title:
-            <input type="text" value="Enter title here" checked={true} />
+            Title: <input type="text" value={title} onChange={OnTitleChange} />{" "}
           </label>
           <label>
-            Release Year:
-            <input type="text" value="Enter Release Year" checked={true} />
+            Release Year:{"  "}
+            <input type="number" value={year} onChange={OnYearChange} />
           </label>
         </div>
         <div>
@@ -45,8 +81,7 @@ function AddGame() {
         </div>
         <div>
           <label>
-            Summary:
-            <textarea value="Type as much or as little as you'd like" />{" "}
+            Summary: <textarea value={summary} onChange={onSummaryChange} />{" "}
           </label>
         </div>
         <div>
@@ -64,7 +99,7 @@ function AddGame() {
         <div>
           <label>
             Your Review:
-            <textarea value="Type as much or as little as you'd like" />{" "}
+            <textarea value={review} onChange={onReviewChange} />{" "}
           </label>
         </div>
       </form>

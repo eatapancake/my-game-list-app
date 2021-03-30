@@ -1,9 +1,5 @@
 import React from "react";
-import GameItem from "./game-item";
-import gameData from "./game-data";
-import GameListing from "./game-listing";
 import GameList from "./game-list";
-import AddGame from "./add-game";
 import { useHistory } from "react-router-dom";
 import TestPage from "../test/test-page";
 
