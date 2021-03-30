@@ -4,7 +4,9 @@ import HomePage from "./home/home-page.js";
 import AllGamesPage from "./all-games/all-games-page.js";
 import MyGamesPage from "./my-games/my-games-page.js";
 import AddGame from "./my-games/add-game.js";
+import GamePage from "./game-page/game-page.js";
 import "./app.css";
+
 
 function App() {
   return (
@@ -22,6 +24,9 @@ function App() {
         </Route>
         <Route path="/add-game">
           <AddGame />
+        </Route>
+        <Route path="/game-page">
+          <GamePage />
         </Route>
       </Switch>
     </BrowserRouter>
