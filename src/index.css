@@ -1,7 +1,7 @@
 body {
-    background: url("./src/images/wave.png");
-    color: rgb(255, 255, 255);
-    max-width: 800px;
-    /* This margin auto trick centers block elements. */
-    margin: 0 auto;
-  }
+  /* background: url("./src/images/wave.png"); */
+  color: rgb(255, 255, 255);
+  max-width: 800px;
+  /* This margin auto trick centers block elements. */
+  margin: 0 auto;
+}
