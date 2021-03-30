@@ -4,6 +4,7 @@ import HomePage from "./home/home-page.js";
 import AllGamesPage from "./all-games/all-games-page.js";
 import MyGamesPage from "./my-games/my-games-page.js";
 import AddGame from "./my-games/add-game.js";
+import "./app.css";
 
 function App() {
   return (
