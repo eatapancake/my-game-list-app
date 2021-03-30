@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 // import axios from "axios";
 
+//API key = df69e0f535954c1897d3d33f2c4169bf
+
 function GameFetch() {
   let headers = new Headers({
     "User-Agent": "Team 4's App Project",
