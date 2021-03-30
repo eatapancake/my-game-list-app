@@ -3,16 +3,16 @@ import gameData from "./game-data";
 
 function GameList() {
   const data = gameData;
-  const {
-    title,
-    releaseYear,
-    genre,
-    summary,
-    developers,
-    platforms,
-    platformListItems,
-    review,
-  } = data;
+  // const {
+  //   title,
+  //   releaseYear,
+  //   genre,
+  //   summary,
+  //   developers,
+  //   platforms,
+  //   platformListItems,
+  //   review,
+  // } = data;
 
   console.log();
 
@@ -22,8 +22,8 @@ function GameList() {
       releaseYear,
       genre,
       summary,
-      developers,
-      platforms,
+      // developers,
+      // platforms,
       review,
     } = item;
 

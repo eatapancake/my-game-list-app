@@ -21,11 +21,13 @@ function AddGame() {
   const [summary, setSummary] = useState(
     "Type as much or as little as you'd like"
   );
-  const [developer, setDeveloper] = useState();
-  const [platform, serPlatform] = useState();
+  const [developer, setDeveloper] = useState("Enter Developers");
+  const [platform, setPlatform] = useState("Enter Platform");
   const [review, setReview] = useState(
     "Type as much or as little as you'd like"
   );
+
+  const [numBox, setNumBox] = useState(5);
 
   const history = useHistory();
 
@@ -41,6 +43,12 @@ function AddGame() {
   const onSummaryChange = (event) => {
     setSummary(event.target.value);
   };
+  const onDeveloperChange = (event) => {
+    setDeveloper(event.target.value);
+  };
+  const onPlatformChange = (event) => {
+    setPlatform(event.target.value);
+  };
 
   const onReviewChange = (event) => {
     setReview(event.target.value);
@@ -54,12 +62,25 @@ function AddGame() {
           value={item}
           onChange={onGenreChange}
           id={i}
+          key={i}
           checked={genre === item}
         />
         {item}
       </label>
     </div>
   ));
+
+  let maxBoxes = 7;
+  // function Boxes() {
+  //   for (let i = 0; i < numBox; i++) {
+  //     return (
+  //       <input key={i} type="text" value="Enter Developers" checked={true} />
+  //     );
+  //   }
+  // }
+  const IncrementBox = () => {
+    setNumBox(numBox + 1);
+  };
 
   return (
     <div>
@@ -84,16 +105,19 @@ function AddGame() {
             Summary: <textarea value={summary} onChange={onSummaryChange} />{" "}
           </label>
         </div>
+
         <div>
           <label>
             Developer:
-            <input type="text" value="Enter Developers" checked={true} />
+            <input type="text" value={developer} onChange={onDeveloperChange} />
+            <button onClick={IncrementBox}>{numBox}+</button>
+            <button>-</button>
           </label>
         </div>
         <div>
           <label>
             Platform:
-            <input type="text" value="Enter Platform" checked={true} />
+            <input type="text" value={platform} onChange={onPlatformChange} />
           </label>
         </div>
         <div>
