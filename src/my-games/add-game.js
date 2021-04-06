@@ -27,7 +27,7 @@ function AddGame() {
     "Type as much or as little as you'd like"
   );
 
-  const [numBox, setNumBox] = useState(5);
+  const [numBox, setNumBox] = useState(0);
 
   const history = useHistory();
 

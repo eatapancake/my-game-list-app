@@ -16,7 +16,8 @@ function GameFetch() {
         //   "https://www.giantbomb.com/api/game/3030-79087/?api_key=dc2056c71aa4a38a1452d90cfca7194e4dd23b31";
         // const response = await fetch(url, { mode: `no-cors` });
         // const payload = "";
-        const url2 = "https://api.rawg.io/api/games";
+        const url2 =
+          "https://api.rawg.io/api/games?key=df69e0f535954c1897d3d33f2c4169bf";
         const response = await fetch(url2, { method: `GET`, headers: headers });
         const json = await response.json();
         console.log(json);
