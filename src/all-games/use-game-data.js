@@ -18,7 +18,7 @@ import { useEffect } from "react";
 // }
 
 //When I get one page showing, I'll work on getting another page working
-function useGameData() {
+function useGameData(pageNum) {
   const [gameFetch, setGameFetch] = useState({
     isLoading: true,
     errorMessage: "",
@@ -48,15 +48,14 @@ function useGameData() {
 
       console.log("Fetch initiated..! 🦴");
       try {
-        // const url =
-        //   "https://www.giantbomb.com/api/game/3030-79087/?api_key=dc2056c71aa4a38a1452d90cfca7194e4dd23b31";
-        // const response = await fetch(url, { mode: `no-cors` });
-        // const payload = "";
-        const url2 =
-          "https://api.rawg.io/api/games?key=df69e0f535954c1897d3d33f2c4169bf";
+        const params = new URLSearchParams({
+          key: "df69e0f535954c1897d3d33f2c4169bf",
+          page: pageNum,
+        });
+
+        const url2 = `https://api.rawg.io/api/games?${params.toString()}`;
         const response = await fetch(url2, { method: `GET`, headers: headers });
         const json = await response.json();
-        // console.log(json);
         const { results, next } = json;
         // console.log(next);
 
@@ -72,7 +71,7 @@ function useGameData() {
       }
     }
     main();
-  }, []);
+  }, [pageNum]);
 
   const { isLoading, errorMessage, nextPage, data } = gameFetch;
   return [isLoading, errorMessage, nextPage, data];

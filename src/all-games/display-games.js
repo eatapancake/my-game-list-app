@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import GameList from "./props/game-list";
 
 //  item.id,
@@ -14,6 +14,7 @@ function DisplayGames({ gameData }) {
     return (
       <div>
         <GameList
+          key={id}
           id={id}
           name={name}
           released={released}
@@ -25,12 +26,7 @@ function DisplayGames({ gameData }) {
     );
   });
 
-  return (
-    <div>
-      {gameListItems}
-      <button>Next Page</button>
-    </div>
-  );
+  return <div>{gameListItems}</div>;
 }
 
 export default DisplayGames;
