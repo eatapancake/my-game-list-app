@@ -26,7 +26,7 @@ function AddGame() {
   // const background_image =
   //   "https://media.rawg.io/media/games/84d/84da2ac3fdfc6507807a1808595afb12.jpg";
   // }
-  const { name, rating, released, background_image } = data;
+  // const { name, rating, released, background_image } = data;
 
   console.log(data);
 
@@ -82,10 +82,15 @@ function AddGame() {
       <div>
         <h1>My Games 🎲</h1>
         <form>
-          <h2>Add "{name}"</h2>
-          <img id={name} src={background_image} alt={name} width="400" />
-          <p>Release Date: {released}</p>
-          <p>Rating: {rating} </p>
+          <h2>Add "{data.name}"</h2>
+          <img
+            id={data.name}
+            src={data.background_image}
+            alt={data.name}
+            width="400"
+          />
+          <p>Release Date: {data.released}</p>
+          <p>Rating: {data.rating} </p>
           <label>
             Your Rating (1-5):{" "}
             <div>
