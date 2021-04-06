@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import ErrorMessage from "../common/error-message";
+import LoadingSpinner from "../common/loading-spinner";
+import useGameItem from "../custom-hooks/use-game-item";
 
 const genres = [
   "Action-adventure",
@@ -15,7 +18,17 @@ const genres = [
 ];
 
 function AddGame() {
-  const [title, setTitle] = useState("Enter Game Title");
+  let { slug } = useParams();
+  if (slug === "") {
+    console.log("There is no ID in the URL");
+    slug = "grand-theft-auto-v";
+  }
+  console.log(`This is the ID: ${slug}`);
+
+  const [isLoading, errorMessage, data] = useGameItem(slug);
+  console.log(data);
+
+  const [title, setTitle] = useState("Enter");
   const [year, setYear] = useState(2000);
   const [genre, setGenre] = useState("Action-adventure");
   const [summary, setSummary] = useState(
@@ -70,7 +83,7 @@ function AddGame() {
     </div>
   ));
 
-  let maxBoxes = 7;
+  // let maxBoxes = 7;
   // function Boxes() {
   //   for (let i = 0; i < numBox; i++) {
   //     return (
@@ -82,55 +95,68 @@ function AddGame() {
     setNumBox(numBox + 1);
   };
 
-  return (
-    <div>
-      <h1>My Games 🎲</h1>
-      <form>
-        <h2>Add new game</h2>
-        <div>
-          <label>
-            Title: <input type="text" value={title} onChange={OnTitleChange} />{" "}
-          </label>
-          <label>
-            Release Year:{"  "}
-            <input type="number" value={year} onChange={OnYearChange} />
-          </label>
-        </div>
-        <div>
-          Genre
-          {genresListItems}
-        </div>
-        <div>
-          <label>
-            Summary: <textarea value={summary} onChange={onSummaryChange} />{" "}
-          </label>
-        </div>
+  let contents;
+  if (isLoading) contents = <LoadingSpinner />;
+  else if (errorMessage !== "")
+    contents = <ErrorMessage>{errorMessage}</ErrorMessage>;
+  else {
+    contents = (
+      <div>
+        <h1>My Games 🎲</h1>
+        <form>
+          <h2>Add {data} game</h2>
+          <div>
+            <label>
+              Title:{" "}
+              <input type="text" value={title} onChange={OnTitleChange} />{" "}
+            </label>
+            <label>
+              Release Year:{"  "}
+              <input type="number" value={year} onChange={OnYearChange} />
+            </label>
+          </div>
+          <div>
+            Genre
+            {genresListItems}
+          </div>
+          <div>
+            <label>
+              Summary: <textarea value={summary} onChange={onSummaryChange} />{" "}
+            </label>
+          </div>
 
-        <div>
-          <label>
-            Developer:
-            <input type="text" value={developer} onChange={onDeveloperChange} />
-            <button onClick={IncrementBox}>{numBox}+</button>
-            <button>-</button>
-          </label>
-        </div>
-        <div>
-          <label>
-            Platform:
-            <input type="text" value={platform} onChange={onPlatformChange} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Your Review:
-            <textarea value={review} onChange={onReviewChange} />{" "}
-          </label>
-        </div>
-      </form>
-      <button onClick={() => history.push(`/my-games`)}>Cancel</button>
-      <button>Save</button>
-    </div>
-  );
+          <div>
+            <label>
+              Developer:
+              <input
+                type="text"
+                value={developer}
+                onChange={onDeveloperChange}
+              />
+              <button onClick={IncrementBox}>{numBox}+</button>
+              <button>-</button>
+            </label>
+          </div>
+          <div>
+            <label>
+              Platform:
+              <input type="text" value={platform} onChange={onPlatformChange} />
+            </label>
+          </div>
+          <div>
+            <label>
+              Your Review:
+              <textarea value={review} onChange={onReviewChange} />{" "}
+            </label>
+          </div>
+        </form>
+        <button onClick={() => history.push(`/my-games`)}>Cancel</button>
+        <button>Save</button>
+      </div>
+    );
+  }
+
+  return <div>{contents}</div>;
 }
 
 export default AddGame;

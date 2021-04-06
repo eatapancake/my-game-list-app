@@ -1,5 +1,7 @@
 import React from "react";
 import GameList from "./props/game-list";
+import { useHistory } from "react-router-dom";
+import AddGame from "../my-games/add-game";
 
 //  item.id,
 //  name: item.name,
@@ -8,20 +10,23 @@ import GameList from "./props/game-list";
 //  rating: item.rating,
 
 function DisplayGames({ gameData }) {
+  const history = useHistory();
   const gameListItems = gameData.map((item, i) => {
-    const { id, name, released, background_image, rating } = item;
+    const { id, slug, name, released, background_image, rating } = item;
 
     return (
-      <div>
+      <div key={id}>
         <GameList
-          key={id}
           id={id}
+          slug={slug}
           name={name}
           released={released}
           background_image={background_image}
           rating={rating}
         />
-        <button>Add +</button>
+        <button onClick={() => history.push(`/add-game/${slug}`)}>
+          + My Games
+        </button>
       </div>
     );
   });

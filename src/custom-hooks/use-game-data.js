@@ -2,22 +2,6 @@ import React, { useState } from "react";
 
 import { useEffect } from "react";
 
-//Utility function
-// function decodeGameDate(results) {
-//   //Decode the trivia data HTML entities.
-//   const decodedResults = results.map((item) => {
-//     return {
-//       id: item.id,
-//       name: item.name,
-//       released: item.released,
-//       background_image: item.background_image,
-//       rating: item.rating,
-//     };
-//   });
-//   return decodedResults;
-// }
-
-//When I get one page showing, I'll work on getting another page working
 function useGameData(pageNum) {
   const [gameFetch, setGameFetch] = useState({
     isLoading: true,
@@ -28,10 +12,11 @@ function useGameData(pageNum) {
 
   useEffect(() => {
     function decodeGameDate(results) {
-      //Decode the trivia data HTML entities.
+      //Decode the Game data
       const decodedResults = results.map((item) => {
         return {
           id: item.id,
+          slug: item.slug,
           name: item.name,
           released: item.released,
           background_image: item.background_image,
