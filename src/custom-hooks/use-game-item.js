@@ -8,24 +8,24 @@ function useGameItem(slug) {
   });
 
   useEffect(() => {
-    function decodeGameData(results) {
-      //Decoding
+    // function decodeGameData(results) {
+    //   //Decoding
 
-      //   const [name, released, genres, background_image] = results[0];
-      const decodedResults2 = results[0].name;
+    //   //   const [name, released, genres, background_image] = results[0];
+    //   const decodedResults2 = results[0].name;
 
-      //   const decodedResults = results.map((item) => {
-      //     return {
-      //       id: item.id,
-      //       slug: item.slug,
-      //       name: item.name,
-      //       released: item.released,
-      //       background_image: item.background_image,
-      //       rating: item.rating,
-      //     };
-      //   });
-      return decodedResults2;
-    }
+    //   //   const decodedResults = results.map((item) => {
+    //   //     return {
+    //   //       id: item.id,
+    //   //       slug: item.slug,
+    //   //       name: item.name,
+    //   //       released: item.released,
+    //   //       background_image: item.background_image,
+    //   //       rating: item.rating,
+    //   //     };
+    //   //   });
+    //   return decodedResults2;
+    // }
 
     async function getGame() {
       let headers = new Headers({

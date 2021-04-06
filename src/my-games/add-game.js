@@ -19,10 +19,11 @@ const genres = [
 
 function AddGame() {
   let { slug } = useParams();
-  if (slug === "") {
-    console.log("There is no ID in the URL");
-    slug = "grand-theft-auto-v";
-  }
+
+  // if (slug === "") {
+  //   console.log("There is no ID in the URL");
+  //   slug = "grand-theft-auto-v";
+  // }
   console.log(`This is the ID: ${slug}`);
 
   const [isLoading, errorMessage, data] = useGameItem(slug);
@@ -68,7 +69,7 @@ function AddGame() {
   };
 
   const genresListItems = genres.map((item, i) => (
-    <div>
+    <div key={i}>
       <label>
         <input
           type="radio"
