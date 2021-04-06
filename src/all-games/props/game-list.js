@@ -6,25 +6,15 @@ import React from "react";
 //  background_image: item.background_image,
 //  rating: item.rating,
 
-function GameList({ name }) {
-  // const data = gameData;
-
-  // const { id, title, released, background_image, rating } = props;
-
-  // console.log(data);
-
-  // const dataList = data.map((item, i) => {
-  //   const { id, title, released, background_image, rating } = item;
-  // console.log(id);
-  console.log(name);
-
+function GameList({ id, name, released, background_image, rating }) {
   return (
     <div>
-      {/* <h1>
+      <h3>
         {" "}
-        {title} ({released}){" "}
-      </h1>
-      <p>Rating: {rating}</p> */}
+        {name} ({released}){" "}
+      </h3>
+      <p>Rating: {rating}</p>
+      <img id={name} src={background_image} alt={name} width="400" />
     </div>
   );
 }
