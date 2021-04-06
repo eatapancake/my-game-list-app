@@ -4,10 +4,18 @@ import ErrorMessage from "../common/error-message";
 import LoadingSpinner from "../common/loading-spinner";
 import useGameItem from "../custom-hooks/use-game-item";
 
-// name: name,
-// rating: rating,
-// released: released,
-// background_image,
+const genres = [
+  "Action-adventure",
+  "Multiplayer online battle arena (MOBA)",
+  "Puzzlers and party games",
+  "Platformer",
+  "Real-time strategy (RTS)",
+  "Role-playing (RPG, ARPG, and More)",
+  "Sandbox",
+  "Shooters (FPS and TPS)",
+  "Simulation and sports",
+  "Survival and horror",
+];
 
 function AddGame() {
   let { slug } = useParams();
@@ -19,19 +27,10 @@ function AddGame() {
   console.log(`This is the ID: ${slug}`);
 
   const [isLoading, errorMessage, data] = useGameItem(slug);
-  // if (data === null) {
-  // const name = "o";
-  // const rating = "o";
-  // const released = "o";
-  // const background_image =
-  //   "https://media.rawg.io/media/games/84d/84da2ac3fdfc6507807a1808595afb12.jpg";
-  // }
-  const { name, rating, released, background_image } = data;
-
   console.log(data);
 
-  const [category, setCategory] = useState("Playing");
-  const [myRating, setMyRating] = useState();
+  const [title, setTitle] = useState("Enter");
+  const [year, setYear] = useState(2000);
   const [genre, setGenre] = useState("Action-adventure");
   const [summary, setSummary] = useState(
     "Type as much or as little as you'd like"
@@ -46,18 +45,14 @@ function AddGame() {
 
   const history = useHistory();
 
-  const onCategoryChange = (event) => {
-    setCategory(event.target.value);
+  const OnTitleChange = (event) => {
+    setTitle(event.target.value);
   };
-  const onRatingChange = (event) => {
-    let num = event.target.value;
-    if (num < 1) {
-      num = 1;
-    }
-    if (num > 6) {
-      num = 5;
-    }
-    setMyRating(num);
+  const OnYearChange = (event) => {
+    setYear(event.target.value);
+  };
+  const onGenreChange = (event) => {
+    setGenre(event.target.value);
   };
   const onSummaryChange = (event) => {
     setSummary(event.target.value);
@@ -73,6 +68,34 @@ function AddGame() {
     setReview(event.target.value);
   };
 
+  const genresListItems = genres.map((item, i) => (
+    <div key={i}>
+      <label>
+        <input
+          type="radio"
+          value={item}
+          onChange={onGenreChange}
+          id={i}
+          key={i}
+          checked={genre === item}
+        />
+        {item}
+      </label>
+    </div>
+  ));
+
+  // let maxBoxes = 7;
+  // function Boxes() {
+  //   for (let i = 0; i < numBox; i++) {
+  //     return (
+  //       <input key={i} type="text" value="Enter Developers" checked={true} />
+  //     );
+  //   }
+  // }
+  const IncrementBox = () => {
+    setNumBox(numBox + 1);
+  };
+
   let contents;
   if (isLoading) contents = <LoadingSpinner />;
   else if (errorMessage !== "")
@@ -82,44 +105,22 @@ function AddGame() {
       <div>
         <h1>My Games 🎲</h1>
         <form>
-          <h2>Add "{name}"</h2>
-          <img id={name} src={background_image} alt={name} width="400" />
-          <p>Release Date: {released}</p>
-          <p>Rating: {rating} </p>
-          <label>
-            Your Rating (1-5):{" "}
-            <div>
-              <input type="number" onChange={onRatingChange}></input>
-            </div>{" "}
-          </label>
-          <p>
-            Currently:{" "}
-            <div>
-              <input
-                type="radio"
-                value="Playing"
-                onChange={onCategoryChange}
-                checked={category === "Playing"}
-              />
-              Playing{" "}
-              <input
-                type="radio"
-                value="Completed"
-                onChange={onCategoryChange}
-                checked={category === "Completed"}
-              />
-              Completed{" "}
-              <input
-                type="radio"
-                value="Not Played"
-                onChange={onCategoryChange}
-                checked={category === "Not Played"}
-              />
-              Not Played{" "}
-            </div>
-          </p>
-
-          {/* <div>
+          <h2>Add {data} game</h2>
+          <div>
+            <label>
+              Title:{" "}
+              <input type="text" value={title} onChange={OnTitleChange} />{" "}
+            </label>
+            <label>
+              Release Year:{"  "}
+              <input type="number" value={year} onChange={OnYearChange} />
+            </label>
+          </div>
+          <div>
+            Genre
+            {genresListItems}
+          </div>
+          <div>
             <label>
               Summary: <textarea value={summary} onChange={onSummaryChange} />{" "}
             </label>
@@ -133,6 +134,7 @@ function AddGame() {
                 value={developer}
                 onChange={onDeveloperChange}
               />
+              <button onClick={IncrementBox}>{numBox}+</button>
               <button>-</button>
             </label>
           </div>
@@ -147,7 +149,7 @@ function AddGame() {
               Your Review:
               <textarea value={review} onChange={onReviewChange} />{" "}
             </label>
-          </div> */}
+          </div>
         </form>
         <button onClick={() => history.push(`/my-games`)}>Cancel</button>
         <button>Save</button>
