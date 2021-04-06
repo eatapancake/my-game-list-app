@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import showGame from "./props/games-showing";
-import { useState, useEffect } from "react";
 import mainContent from "./Components/mainContent";
 import sidebar from "./Components/sidebar";
 import "./props/all-games.css";
-import useGameData from "./use-game-data";
+import useGameData from "../custom-hooks/use-game-data";
 import LoadingSpinner from "../common/loading-spinner";
 import ErrorMessage from "../common/error-message";
 import DisplayGames from "./display-games";
@@ -23,7 +22,7 @@ function AllGamesPage() {
   else contents = <DisplayGames gameData={data} />;
 
   console.log(data);
-  
+
   const { gameList, SetGameList } = useState([]);
   const { topGame, SetTopGame } = useState([]);
   const { search, SetSearch } = useState("");
@@ -41,15 +40,15 @@ function AllGamesPage() {
 
     //console.log(search);
     FetchGame(search);
-  }
+  };
 
   const FetchGame = async (query) => {
-
-    const temp = await fetch(`https://api.igdb.com/v4/search/game?q=${query}&order_by=titles&sort-asc&limit=10`)
-    .then(res => res.json());
+    const temp = await fetch(
+      `https://api.igdb.com/v4/search/game?q=${query}&order_by=titles&sort-asc&limit=10`
+    ).then((res) => res.json());
 
     SetGameList(temp.results);
-  }
+  };
 
   useEffect(() => {
     GetTopGame();
@@ -57,6 +56,7 @@ function AllGamesPage() {
   }, []);
   console.log(topGame);
 
+  // console.log(data);
 
   return (
     <main>
@@ -64,16 +64,16 @@ function AllGamesPage() {
       <h2>The Games we present to you</h2>
       {contents}
       <button onClick={onButtonClick}>{"Next -->"}</button>
-       <div className="all-games-page">
+      <div className="all-games-page">
         <h2>Game search with the API</h2>
         <div className="">
-          <sidebar topGame={topGame}/>
-          <mainContent 
-          HandleSearch={HandleSearch} 
-          search={search}
-          SetSearch={SetSearch}
-          gameList={gameList}
-         />
+          <sidebar topGame={topGame} />
+          <mainContent
+            HandleSearch={HandleSearch}
+            search={search}
+            SetSearch={SetSearch}
+            gameList={gameList}
+          />
         </div>
       </div>
     </main>
