@@ -5,7 +5,7 @@ function GameItem() {
 
   const title = "Animal Crossing: New Horizon";
   const releaseYear = 2020;
-  //   const favorite = false;
+    //const favorite = false;
   const genre = "Simulation and sports";
   const summary =
     "In New Horizon, the player arrives in a deserted island and is given the chance to turn it into paradise. Together with Tom Nook and the rest of the residents, the player gets to craft, fish, and dig their way into transforming their island.";

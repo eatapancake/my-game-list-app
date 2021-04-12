@@ -18,6 +18,7 @@ function useGameData(pageNum) {
           id: item.id,
           slug: item.slug,
           name: item.name,
+          summary: item.description,
           released: item.released,
           background_image: item.background_image,
           rating: item.rating,

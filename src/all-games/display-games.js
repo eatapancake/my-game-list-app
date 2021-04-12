@@ -27,6 +27,9 @@ function DisplayGames({ gameData }) {
         <button onClick={() => history.push(`/add-game/${slug}`)}>
           + My Games
         </button>
+        <button onClick={() => history.push(`/game-details/${slug}`)}>
+          Details
+        </button>
       </div>
     );
   });

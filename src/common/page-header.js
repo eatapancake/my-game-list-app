@@ -6,8 +6,7 @@ function PageHeader() {
       <span className="page-header__logo">🍙🍙🍙</span>
       <nav className="page-header__nav">
         <Link to="/">Home</Link> | <Link to="/all-games">All Games</Link> |{" "}
-        <Link to="/my-games">My Games</Link> |{" "}
-        <Link to="/game-page">Game Page(testing page)</Link>
+        <Link to="/my-games">My Games</Link>
       </nav>
     </header>
   );
