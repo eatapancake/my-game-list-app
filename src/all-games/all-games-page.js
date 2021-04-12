@@ -10,7 +10,7 @@ import DisplayGames from "./display-games";
 
 function AllGamesPage() {
   const [pageNum, setPageNum] = useState(1);
-  const [isLoading, errorMessage, nextPage, data] = useGameData(pageNum);
+  const [isLoading, errorMessage, data] = useGameData(pageNum);
 
   const onButtonClick = (event) => {
     setPageNum(pageNum + 1);

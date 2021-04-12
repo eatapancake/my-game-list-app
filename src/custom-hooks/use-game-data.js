@@ -6,7 +6,7 @@ function useGameData(pageNum) {
   const [gameFetch, setGameFetch] = useState({
     isLoading: true,
     errorMessage: "",
-    nextPage: null,
+
     data: null,
   });
 
@@ -47,7 +47,7 @@ function useGameData(pageNum) {
         setGameFetch({
           isLoading: false,
           errorMessage: "",
-          nextPage: next,
+
           data: decodeGameDate(results),
         });
       } catch (err) {
@@ -58,8 +58,8 @@ function useGameData(pageNum) {
     main();
   }, [pageNum]);
 
-  const { isLoading, errorMessage, nextPage, data } = gameFetch;
-  return [isLoading, errorMessage, nextPage, data];
+  const { isLoading, errorMessage, data } = gameFetch;
+  return [isLoading, errorMessage, data];
 }
 
 export default useGameData;
