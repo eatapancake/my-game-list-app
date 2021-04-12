@@ -52,7 +52,7 @@ function useGameData(pageNum) {
           data: decodeGameDate(results),
         });
       } catch (err) {
-        console.log("An error has occured!! D:");
+        console.log("An error has occurred!! D:");
         console.error(err);
       }
     }
