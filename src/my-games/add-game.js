@@ -1,77 +1,136 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocalStorage } from "react-use";
+import { useHistory, useParams } from "react-router-dom";
+import ErrorMessage from "../common/error-message";
+import LoadingSpinner from "../common/loading-spinner";
+import useGameItem from "../custom-hooks/use-game-item";
 
-const genres = [
-  "Action-adventure",
-  "Multiplayer online battle arena (MOBA)",
-  "Puzzlers and party games",
-  "Platformer",
-  "Real-time strategy (RTS)",
-  "Role-playing (RPG, ARPG, and More)",
-  "Sandbox",
-  "Shooters (FPS and TPS)",
-  "Simulation and sports",
-  "Survival and horror",
-];
+// name: name,
+// rating: rating,
+// released: released,
+// background_image,
 
-const genresListItems = genres.map((genre, i) => (
-  <div>
-    <label>
-      <input type="radio" value={genre} checked={false} />
-      {genre}
-    </label>
-  </div>
-));
 function AddGame() {
+  let { slug } = useParams();
+
+  if (slug === "") {
+    console.log("There is no ID in the URL");
+    slug = "grand-theft-auto-v";
+  }
+  console.log(`This is the ID: ${slug}`);
+
+  const [isLoading, errorMessage, data] = useGameItem(slug);
+  // if (data === null) {
+  // const name = "o";
+  // const rating = "o";
+  // const released = "o";
+  // const background_image =
+  //   "https://media.rawg.io/media/games/84d/84da2ac3fdfc6507807a1808595afb12.jpg";
+  // }
+  // const { name, rating, released, background_image } = data;
+
+  console.log(data);
+
+  const [category, setCategory] = useState("Playing");
+  const [items, setItems, removeItems] = useLocalStorage("items", []);
+  let info;
+  const [myRating, setMyRating] = useState();
   const history = useHistory();
-  return (
-    <div>
-      <h1>My Games 🎲</h1>
-      <form>
-        <h2>Add new game</h2>
-        <div>
+
+  const onCategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
+  const onRatingChange = (event) => {
+    let num = event.target.value;
+    if (num < 1) {
+      num = 1;
+    }
+    if (num > 6) {
+      num = 5;
+    }
+    setMyRating(num);
+  };
+  const onSave = (event) => {
+    addPlayerData();
+    console.log("==================");
+    console.log(info[0]);
+    setItems([...items, info]);
+    console.log("-----------------------");
+    console.log(items[0]);
+    console.log(items[0][0].name);
+    console.log("--------------------");
+  };
+
+  function addPlayerData() {
+    info = [
+      {
+        name: data.name,
+        image: data.background_image,
+        released: data.released,
+        rating: data.rating,
+        playerRating: myRating,
+        playerCategory: category,
+      },
+    ];
+  }
+  let contents;
+  if (isLoading) contents = <LoadingSpinner />;
+  else if (errorMessage !== "")
+    contents = <ErrorMessage>{errorMessage}</ErrorMessage>;
+  else {
+    contents = (
+      <div>
+        <h1>My Games 🎲</h1>
+        <form>
+          <h2>Add "{data.name}"</h2>
+          <img
+            id={data.name}
+            src={data.background_image}
+            alt={data.name}
+            width="400"
+          />
+          <p>Release Date: {data.released}</p>
+          <p>Rating: {data.rating} </p>
           <label>
-            Title:
-            <input type="text" value="Enter title here" checked={true} />
+            Your Rating (1-5):{" "}
+            <div>
+              <input type="number" onChange={onRatingChange}></input>
+            </div>{" "}
           </label>
-          <label>
-            Release Year:
-            <input type="text" value="Enter Release Year" checked={true} />
-          </label>
-        </div>
-        <div>
-          Genre
-          {genresListItems}
-        </div>
-        <div>
-          <label>
-            Summary:
-            <textarea value="Type as much or as little as you'd like" />{" "}
-          </label>
-        </div>
-        <div>
-          <label>
-            Developer:
-            <input type="text" value="Enter Developers" checked={true} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Platform:
-            <input type="text" value="Enter Platform" checked={true} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Your Review:
-            <textarea value="Type as much or as little as you'd like" />{" "}
-          </label>
-        </div>
-      </form>
-      <button onClick={() => history.push(`/my-games`)}>Cancel</button>
-      <button>Save</button>
-    </div>
-  );
+          <p>
+            Currently:{" "}
+            <div>
+              <input
+                type="radio"
+                value="Playing"
+                onChange={onCategoryChange}
+                checked={category === "Playing"}
+              />
+              Playing{" "}
+              <input
+                type="radio"
+                value="Completed"
+                onChange={onCategoryChange}
+                checked={category === "Completed"}
+              />
+              Completed{" "}
+              <input
+                type="radio"
+                value="Not Played"
+                onChange={onCategoryChange}
+                checked={category === "Not Played"}
+              />
+              Not Played{" "}
+            </div>
+          </p>
+        </form>
+        <button onClick={() => history.push(`/all-games`)}>Cancel</button>
+        <button onClick={onSave}>Save</button>
+      </div>
+    );
+  }
+
+  return <div>{contents}</div>;
 }
 
 export default AddGame;

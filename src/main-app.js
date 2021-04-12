@@ -22,7 +22,7 @@ function App() {
         <Route path="/my-games">
           <MyGamesPage />
         </Route>
-        <Route path="/add-game">
+        <Route path="/add-game/:slug">
           <AddGame />
         </Route>
         <Route path="/game-page">

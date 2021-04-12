@@ -1,59 +1,37 @@
 import React from "react";
-import gameData from "./game-data";
+// import gameData from "./game-data";
+import { useLocalStorage } from "react-use";
 
 function GameList() {
-  const data = gameData;
-  const {
-    title,
-    releaseYear,
-    genre,
-    summary,
-    developers,
-    platforms,
-    platformListItems,
-    review,
-  } = data;
+  const [items, setItems, removeItems] = useLocalStorage("items", []);
 
-  console.log();
+  console.log(items[0][0].name);
 
-  const dataList = data.map((item, i) => {
-    const {
-      title,
-      releaseYear,
-      genre,
-      summary,
-      developers,
-      platforms,
-      review,
-    } = item;
-
-    // const platformListItems = platforms.map((platform, i) => (
-    //   <li>{platform}</li>
-    // ));
-    // const developerListItems = developers.map((developer, i) => (
-    //   <li>{developer}</li>
-    // ));
+  const dataList = items.map((item, i) => {
+    const title = items[i][0].name;
+    const releaseYear = items[i][0].released;
+    const image = items[i][0].image;
+    const rating = Math.round(items[i][0].rating);
+    const myRating = items[i][0].playerRating;
+    const worldRatingString = "⭐".repeat(rating) + " ◽ ".repeat(5 - rating);
+    const ratingString = "⭐".repeat(myRating) + " ◽ ".repeat(5 - myRating);
+    const category = items[i][0].playerCategory;
 
     return (
-      <div>
-        <h1>
-          {" "}
-          {title} ({releaseYear}){" "}
-        </h1>
-        <p>Genre: {genre}</p>
-        <h2>Summary</h2>
-        <p>{summary}</p>
+      <div key={title}>
+        <h2>
+          {i + 1}. {title}
+        </h2>
+        <img id={title} src={image} alt={title} width="400"></img>
+        <p>Released: {releaseYear}</p>
+        <h3>Rating</h3>
+        <ul>
+          <li>World: {worldRatingString} </li>
+          <li>My rating: {ratingString} </li>
+        </ul>
+        <p>Currently: {category}</p>
+
         <p>-----------------------------</p>
-        <h2>Developers</h2>
-        {/* <ul>
-          {developers.map((item, i) => {
-            return <li key={i}>{item} </li>;
-          })}
-        </ul> */}
-        <h2>Platforms</h2>
-        {/* <ul>{platformListItems}</ul> */}
-        <h2>Review</h2>
-        <q>{review}</q>
       </div>
     );
   });
