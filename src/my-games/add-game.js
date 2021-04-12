@@ -35,18 +35,6 @@ function AddGame() {
   const [items, setItems, removeItems] = useLocalStorage("items", []);
   let info;
   const [myRating, setMyRating] = useState();
-  const [genre, setGenre] = useState("Action-adventure");
-  const [summary, setSummary] = useState(
-    "Type as much or as little as you'd like"
-  );
-  const [developer, setDeveloper] = useState("Enter Developers");
-  const [platform, setPlatform] = useState("Enter Platform");
-  const [review, setReview] = useState(
-    "Type as much or as little as you'd like"
-  );
-
-  const [numBox, setNumBox] = useState(0);
-
   const history = useHistory();
 
   const onCategoryChange = (event) => {
@@ -72,19 +60,7 @@ function AddGame() {
     console.log(items[0][0].name);
     console.log("--------------------");
   };
-  const onSummaryChange = (event) => {
-    setSummary(event.target.value);
-  };
-  const onDeveloperChange = (event) => {
-    setDeveloper(event.target.value);
-  };
-  const onPlatformChange = (event) => {
-    setPlatform(event.target.value);
-  };
 
-  const onReviewChange = (event) => {
-    setReview(event.target.value);
-  };
   function addPlayerData() {
     info = [
       {
@@ -147,36 +123,6 @@ function AddGame() {
               Not Played{" "}
             </div>
           </p>
-
-          {/* <div>
-            <label>
-              Summary: <textarea value={summary} onChange={onSummaryChange} />{" "}
-            </label>
-          </div>
-
-          <div>
-            <label>
-              Developer:
-              <input
-                type="text"
-                value={developer}
-                onChange={onDeveloperChange}
-              />
-              <button>-</button>
-            </label>
-          </div>
-          <div>
-            <label>
-              Platform:
-              <input type="text" value={platform} onChange={onPlatformChange} />
-            </label>
-          </div>
-          <div>
-            <label>
-              Your Review:
-              <textarea value={review} onChange={onReviewChange} />{" "}
-            </label>
-          </div> */}
         </form>
         <button onClick={() => history.push(`/all-games`)}>Cancel</button>
         <button onClick={onSave}>Save</button>

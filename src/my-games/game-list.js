@@ -1,9 +1,8 @@
 import React from "react";
-import gameData from "./game-data";
+// import gameData from "./game-data";
 import { useLocalStorage } from "react-use";
 
 function GameList() {
-  const data = gameData;
   const [items, setItems, removeItems] = useLocalStorage("items", []);
 
   console.log(items[0][0].name);
@@ -19,7 +18,7 @@ function GameList() {
     const category = items[i][0].playerCategory;
 
     return (
-      <div>
+      <div key={title}>
         <h2>
           {i + 1}. {title}
         </h2>

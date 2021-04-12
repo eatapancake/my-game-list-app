@@ -1,7 +1,7 @@
 import React from "react";
 import GameList from "./game-list";
 import { useHistory } from "react-router-dom";
-import TestPage from "../test/test-page";
+// import TestPage from "../test/test-page";
 
 function MyGamesPage() {
   const history = useHistory();
