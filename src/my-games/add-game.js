@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocalStorage } from "react-use";
 import { useHistory, useParams } from "react-router-dom";
 import ErrorMessage from "../common/error-message";
 import LoadingSpinner from "../common/loading-spinner";
@@ -31,6 +32,8 @@ function AddGame() {
   console.log(data);
 
   const [category, setCategory] = useState("Playing");
+  const [items, setItems, removeItems] = useLocalStorage("items", []);
+  let info;
   const [myRating, setMyRating] = useState();
   const [genre, setGenre] = useState("Action-adventure");
   const [summary, setSummary] = useState(
@@ -59,6 +62,16 @@ function AddGame() {
     }
     setMyRating(num);
   };
+  const onSave = (event) => {
+    addPlayerData();
+    console.log("==================");
+    console.log(info[0]);
+    setItems([...items, info]);
+    console.log("-----------------------");
+    console.log(items[0]);
+    console.log(items[0][0].name);
+    console.log("--------------------");
+  };
   const onSummaryChange = (event) => {
     setSummary(event.target.value);
   };
@@ -72,7 +85,18 @@ function AddGame() {
   const onReviewChange = (event) => {
     setReview(event.target.value);
   };
-
+  function addPlayerData() {
+    info = [
+      {
+        name: data.name,
+        image: data.background_image,
+        released: data.released,
+        rating: data.rating,
+        playerRating: myRating,
+        playerCategory: category,
+      },
+    ];
+  }
   let contents;
   if (isLoading) contents = <LoadingSpinner />;
   else if (errorMessage !== "")
@@ -154,8 +178,8 @@ function AddGame() {
             </label>
           </div> */}
         </form>
-        <button onClick={() => history.push(`/my-games`)}>Cancel</button>
-        <button>Save</button>
+        <button onClick={() => history.push(`/all-games`)}>Cancel</button>
+        <button onClick={onSave}>Save</button>
       </div>
     );
   }
