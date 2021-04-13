@@ -6,7 +6,7 @@ import MyGamesPage from "./my-games/my-games-page.js";
 import AddGame from "./my-games/add-game.js";
 import "./app.css";
 import GameDetails from "./game-details/game-details.js";
-
+import AddGameSearch from "./my-games/add-game-search.js";
 
 function App() {
   return (
@@ -25,10 +25,12 @@ function App() {
         <Route path="/add-game/:slug">
           <AddGame />
         </Route>
+        <Route path="/add-game-search/:slug">
+          <AddGameSearch />
+        </Route>
         <Route path="/game-details/:slug">
           <GameDetails />
         </Route>
-
       </Switch>
     </BrowserRouter>
   );

@@ -1,10 +1,10 @@
 import React from "react";
 // import gameData from "./game-data";
 import { useLocalStorage } from "react-use";
-import { Delete, Edit } from "@material-ui/icons";
+import { Delete } from "@material-ui/icons";
 
 function GameList() {
-  const [items, setItems, removeItems] = useLocalStorage("items", []);
+  const [items, setItems] = useLocalStorage("items", []);
   let content;
 
   // console.log(items[0][0].name);

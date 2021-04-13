@@ -7,22 +7,31 @@ import useGameData from "../custom-hooks/use-game-data";
 import LoadingSpinner from "../common/loading-spinner";
 import ErrorMessage from "../common/error-message";
 import DisplayGames from "./display-games";
+import { useHistory } from "react-router-dom";
 
 function AllGamesPage() {
   const [userSearch, setUserSearch] = useState("");
   const [pageNum, setPageNum] = useState(1);
   const [isLoading, errorMessage, data] = useGameData(pageNum);
+  const history = useHistory();
 
   const onButtonClick = (event) => {
     setPageNum(pageNum + 1);
   };
+  const onSearchChange = (event) => {
+    setUserSearch(event.target.value);
+    console.log(userSearch);
+  };
+  const onSearchButtonClick = () =>
+    history.push(`/add-game-search/${userSearch}`);
+
   let contents;
   if (isLoading) contents = <LoadingSpinner />;
   else if (errorMessage !== "")
     contents = <ErrorMessage>{errorMessage}</ErrorMessage>;
   else contents = <DisplayGames gameData={data} />;
 
-  console.log(data);
+  // console.log(data);
 
   const { gameList, SetGameList } = useState([]);
   const { topGame, SetTopGame } = useState([]);
@@ -62,7 +71,9 @@ function AllGamesPage() {
   return (
     <main>
       <h1>All Games 🎮</h1>
-
+      <label>Enter Game Title: </label>{" "}
+      <input onChange={onSearchChange} type="text" value={userSearch}></input>
+      <button onClick={onSearchButtonClick}>Search</button>
       {contents}
       <button onClick={onButtonClick}>{"Next -->"}</button>
       <div className="all-games-page">

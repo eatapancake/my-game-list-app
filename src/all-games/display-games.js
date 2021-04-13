@@ -1,7 +1,6 @@
 import React from "react";
 import GameList from "./props/game-list";
 import { useHistory } from "react-router-dom";
-import AddGame from "../my-games/add-game";
 
 //  item.id,
 //  name: item.name,
