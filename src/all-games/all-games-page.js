@@ -9,6 +9,7 @@ import ErrorMessage from "../common/error-message";
 import DisplayGames from "./display-games";
 
 function AllGamesPage() {
+  const [userSearch, setUserSearch] = useState("");
   const [pageNum, setPageNum] = useState(1);
   const [isLoading, errorMessage, data] = useGameData(pageNum);
 
