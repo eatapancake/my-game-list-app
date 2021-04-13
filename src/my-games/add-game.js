@@ -32,8 +32,7 @@ function AddGame() {
   // console.log(data);
 
   const [category, setCategory] = useState("Playing");
-  const [items, setItems, removeItems] = useLocalStorage("items", []);
-  const [checkUpdate, setCheckUpdate] = useState();
+  const [items, setItems] = useLocalStorage("items", []);
   const [success, setSuccess] = useState("");
   const [disable, setDisable] = useState(false);
   let info;

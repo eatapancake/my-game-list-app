@@ -1,0 +1,33 @@
+.page-header {
+  margin: 1rem;
+  margin-left: 30%;
+  text-align: center;
+  background-color: rgba(122, 107, 172, 0.397);
+  width: 250px;
+  box-shadow: 0 2px 4px rgb(46, 73, 55);
+  border-radius: 10px;
+  min-width: 300px;
+}
+.page-header__logo {
+  font-size: 1.5rem;
+}
+/* 
+.nav__link {
+  color: rgb(40, 155, 30);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.15s all;
+  font-style: italic;
+}
+
+.nav__link:visited {
+  color: rgb(136, 31, 31);
+}
+
+.nav__link:hover {
+  text-decoration: underline;
+}
+
+.nav__link:active {
+  color: rgb(150, 16, 16);
+} */

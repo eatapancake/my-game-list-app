@@ -1,6 +1,7 @@
 import React from "react";
 import GameList from "./game-list";
 import { useHistory } from "react-router-dom";
+import "./game-list.css";
 // import TestPage from "../test/test-page";
 
 function MyGamesPage() {
@@ -9,7 +10,12 @@ function MyGamesPage() {
   return (
     <div>
       <h1>My Games 🎲</h1>
-      <button onClick={() => history.push(`/all-games`)}>Add New Game</button>
+      <button
+        className="game__button_new"
+        onClick={() => history.push(`/all-games`)}
+      >
+        Add New Game
+      </button>
       <GameList />
     </div>
   );

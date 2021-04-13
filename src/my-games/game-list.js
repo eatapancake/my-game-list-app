@@ -3,6 +3,8 @@ import React from "react";
 import { useLocalStorage } from "react-use";
 import { Delete } from "@material-ui/icons";
 
+import "./game-list.css";
+
 function GameList() {
   const [items, setItems] = useLocalStorage("items", []);
   let content;
@@ -27,11 +29,11 @@ function GameList() {
     };
 
     return (
-      <div key={title}>
-        <h2>
+      <li className="" key={title}>
+        <h2 className="">
           {i + 1}. {title}
         </h2>
-        <img id={title} src={image} alt={title} width="400"></img>
+        <img id={title} src={image} alt={title} height="250"></img>
         <p>Released: {releaseYear}</p>
         <h3>Rating</h3>
         <ul>
@@ -39,12 +41,12 @@ function GameList() {
           <li>My rating: {ratingString} </li>
         </ul>
         <p>Currently: {category}</p>
-        <button onClick={onDeleteClick}>
+        <button className="game__button" onClick={onDeleteClick}>
           <Delete />
         </button>
 
         <p>-----------------------------</p>
-      </div>
+      </li>
     );
   });
 
@@ -57,9 +59,9 @@ function GameList() {
       </div>
     );
   } else {
-    content = <div>{dataList}</div>;
+    content = <ul className="game-list">{dataList}</ul>;
   }
-  return <div>{content}</div>;
+  return <div className="game-container">{content}</div>;
 }
 
 export default GameList;
