@@ -1,6 +1,28 @@
 .hr {
-    border: 0;
-    height: 1px;
-    background: #333;
-    background-image: linear-gradient(to right, #ccc, #333, #ccc);
-  }
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+.all_games__button {
+  font-size: 0.8rem;
+  padding: 0.25rem;
+  border-radius: 0.4rem;
+  border: none;
+  background-color: rgb(236, 227, 227);
+  color: #221f1f;
+  transition: all 0.15s;
+  outline: none;
+}
+.all_games__button:hover {
+  outline: seashell;
+  background-color: springgreen;
+  cursor: pointer;
+}
+.all_games__container {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+}

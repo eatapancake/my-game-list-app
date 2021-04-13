@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import ErrorMessage from "../common/error-message";
 import LoadingSpinner from "../common/loading-spinner";
 import useGameSearch from "../custom-hooks/use-game-search";
+import "./game-list.css";
 
 function AddGameSearch() {
   let { slug } = useParams();
@@ -67,7 +68,7 @@ function AddGameSearch() {
     contents = <ErrorMessage>{errorMessage}</ErrorMessage>;
   else {
     contents = (
-      <div>
+      <div className="game-container ">
         <h1>My Games 🎲</h1>
         <form>
           <h2>Add "{data.name}"</h2>
@@ -85,7 +86,8 @@ function AddGameSearch() {
               <input type="number" onChange={onRatingChange}></input>
             </div>{" "}
           </label>
-          <p>
+          <div>
+            <p> </p>
             Currently:{" "}
             <div>
               <input
@@ -110,12 +112,18 @@ function AddGameSearch() {
               />
               Not Played{" "}
             </div>
-          </p>
+          </div>
         </form>
-        <button onClick={() => history.push(`/all-games`)}>Cancel</button>
-        <button disabled={disable} onClick={onSave}>
-          Save
-        </button>
+        <div>
+          {" "}
+          <button onClick={() => history.push(`/all-games`)}>
+            Cancel
+          </button>{" "}
+          <button disabled={disable} onClick={onSave}>
+            Save
+          </button>
+        </div>
+
         {success}
       </div>
     );

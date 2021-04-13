@@ -1,6 +1,8 @@
 import React from "react";
 import GameList from "./props/game-list";
 import { useHistory } from "react-router-dom";
+import "../all-games/props/all-games.css";
+import "../my-games/game-list.css";
 
 //  item.id,
 //  name: item.name,
@@ -23,17 +25,23 @@ function DisplayGames({ gameData }) {
           background_image={background_image}
           rating={rating}
         />
-        <button onClick={() => history.push(`/add-game/${slug}`)}>
+        <button
+          className="all_games__button"
+          onClick={() => history.push(`/add-game/${slug}`)}
+        >
           + My Games
-        </button>
-        <button onClick={() => history.push(`/game-details/${slug}`)}>
+        </button>{" "}
+        <button
+          className="all_games__button"
+          onClick={() => history.push(`/game-details/${slug}`)}
+        >
           Details
         </button>
       </div>
     );
   });
 
-  return <div>{gameListItems}</div>;
+  return <div className="game-container">{gameListItems}</div>;
 }
 
 export default DisplayGames;

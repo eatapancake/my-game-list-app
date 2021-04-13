@@ -31,7 +31,7 @@ function useGameItem(slug) {
           key: "df69e0f535954c1897d3d33f2c4169bf",
           // search: slug,
         });
-        const url2 = `https://api.rawg.io/api/games?${params.toString()}`;
+        // const url2 = `https://api.rawg.io/api/games?${params.toString()}`;
         const url = `https://api.rawg.io/api/games/${slug}?${params.toString()}`;
         const response = await fetch(url, { method: `GET`, headers: headers });
         const json = await response.json();

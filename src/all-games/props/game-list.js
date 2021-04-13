@@ -14,7 +14,7 @@ function GameList({ id, name, released, background_image, rating }) {
         {name} ({released}){" "}
       </h3>
       <p>Rating: {rating}</p>
-      <img id={name} src={background_image} alt={name} width="400" />
+      <img id={name} src={background_image} alt={name} width="700" />
     </div>
   );
 }

@@ -42,7 +42,7 @@ function useGameData(pageNum) {
         const url2 = `https://api.rawg.io/api/games?${params.toString()}`;
         const response = await fetch(url2, { method: `GET`, headers: headers });
         const json = await response.json();
-        const { results, next } = json;
+        const { results } = json;
         // console.log(next);
 
         setGameFetch({

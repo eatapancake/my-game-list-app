@@ -21,11 +21,10 @@ function GameList() {
     const ratingString = "⭐".repeat(myRating) + " ◽ ".repeat(5 - myRating);
     const category = items[i][0].playerCategory;
 
-    const onDeleteClick = (event) => {
+    const onDeleteClick = () => {
       items.splice(i, 1);
       const oops = items;
       setItems(oops);
-      console.log("fuck");
     };
 
     return (
@@ -55,7 +54,7 @@ function GameList() {
       <div>
         {" "}
         <h2>You have no games in your list :(</h2>{" "}
-        <p>Please add come back once you add some</p>
+        <p>Please come back once you add some</p>
       </div>
     );
   } else {

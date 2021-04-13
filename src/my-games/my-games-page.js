@@ -10,13 +10,13 @@ function MyGamesPage() {
   return (
     <div>
       <h1>My Games 🎲</h1>
+      <GameList />
       <button
         className="game__button_new"
         onClick={() => history.push(`/all-games`)}
       >
-        Add New Game
+        + New Game
       </button>
-      <GameList />
     </div>
   );
 }

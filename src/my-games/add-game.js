@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import ErrorMessage from "../common/error-message";
 import LoadingSpinner from "../common/loading-spinner";
 import useGameItem from "../custom-hooks/use-game-item";
+import "./game-list.css";
 
 // name: name,
 // rating: rating,
@@ -93,7 +94,7 @@ function AddGame() {
     contents = <ErrorMessage>{errorMessage}</ErrorMessage>;
   else {
     contents = (
-      <div>
+      <div className="game-container ">
         <h1>My Games 🎲</h1>
         <form>
           <h2>Add "{data.name}"</h2>
@@ -111,7 +112,8 @@ function AddGame() {
               <input type="number" onChange={onRatingChange}></input>
             </div>{" "}
           </label>
-          <p>
+          <p> </p>
+          <div>
             Currently:{" "}
             <div>
               <input
@@ -136,12 +138,18 @@ function AddGame() {
               />
               Not Played{" "}
             </div>
-          </p>
+          </div>
         </form>
-        <button onClick={() => history.push(`/all-games`)}>Cancel</button>
-        <button disabled={disable} onClick={onSave}>
-          Save
-        </button>
+        <div>
+          {" "}
+          <button onClick={() => history.push(`/all-games`)}>
+            Cancel
+          </button>{" "}
+          <button disabled={disable} onClick={onSave}>
+            Save
+          </button>
+        </div>
+
         {success}
       </div>
     );
