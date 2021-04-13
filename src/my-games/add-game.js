@@ -38,7 +38,7 @@ function AddGame() {
   const [disable, setDisable] = useState(false);
   let info;
 
-  const [myRating, setMyRating] = useState();
+  const [myRating, setMyRating] = useState(0);
   const history = useHistory();
 
   const onCategoryChange = (event) => {
@@ -47,13 +47,16 @@ function AddGame() {
   };
   const onRatingChange = (event) => {
     let num = event.target.value;
-    if (num < 1) {
-      num = 1;
+    const min = 0;
+    const max = 5;
+    if (num < min) setMyRating(min);
+    else if (num > max) setMyRating(max);
+    else {
+      // num = Number.parseInt(num);
+      num = Math.round(num);
+      setMyRating(num);
     }
-    if (num > 6) {
-      num = 5;
-    }
-    setMyRating(num);
+
     setDisable(false);
   };
   const onSave = (event) => {
@@ -102,14 +105,18 @@ function AddGame() {
             id={data.name}
             src={data.background_image}
             alt={data.name}
-            width="400"
+            width="600"
           />
           <p>Release Date: {data.released}</p>
           <p>Rating: {data.rating} </p>
           <label>
-            Your Rating (1-5):{" "}
+            Your Rating (0-5):{" "}
             <div>
-              <input type="number" onChange={onRatingChange}></input>
+              <input
+                type="number"
+                onChange={onRatingChange}
+                value={myRating}
+              ></input>
             </div>{" "}
           </label>
           <p> </p>
@@ -151,6 +158,7 @@ function AddGame() {
         </div>
 
         {success}
+        <p></p>
       </div>
     );
   }

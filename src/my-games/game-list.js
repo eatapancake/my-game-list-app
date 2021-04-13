@@ -21,6 +21,8 @@ function GameList() {
     const ratingString = "⭐".repeat(myRating) + " ◽ ".repeat(5 - myRating);
     const category = items[i][0].playerCategory;
 
+    console.log(myRating);
+
     const onDeleteClick = () => {
       items.splice(i, 1);
       const oops = items;
