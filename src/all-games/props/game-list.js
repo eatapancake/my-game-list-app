@@ -19,6 +19,4 @@ function GameList({ id, name, released, background_image, rating }) {
   );
 }
 
-// return <div>{dataList}</div>;
-
 export default GameList;

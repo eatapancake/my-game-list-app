@@ -31,44 +31,6 @@ function AllGamesPage() {
   else if (errorMessage !== "")
     contents = <ErrorMessage>{errorMessage}</ErrorMessage>;
   else contents = <DisplayGames gameData={data} />;
-
-  // console.log(data);
-
-  // const { gameList, SetGameList } = useState([]);
-  // const { topGame, SetTopGame } = useState([]);
-  // const { search, SetSearch } = useState("");
-
-  // const GetTopGame = async () => {
-  //   const temp = await fetch(
-  //     `https://api.igdb.com/v4/popularity/`
-  //   ).then((res) => res.json());
-
-  //   SetTopGame(temp.top.slice(0, 8));
-  // };
-
-  // const HandleSearch = (e) => {
-  //   e.preventDefault();
-
-  //   //console.log(search);
-  //   FetchGame(search);
-  // };
-
-  // const FetchGame = async (query) => {
-  //   const temp = await fetch(
-  //     `https://api.igdb.com/v4/search/game?q=${query}&order_by=titles&sort-asc&limit=10`
-  //   ).then((res) => res.json());
-
-  //   SetGameList(temp.results);
-  // };
-
-  // useEffect(() => {
-  //   GetTopGame();
-  //   console.log("Top Game");
-  // }, []);
-  // console.log(topGame);
-
-  // console.log(data);
-
   return (
     <main>
       <h1>All Games 🎮</h1>
