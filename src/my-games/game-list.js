@@ -4,8 +4,9 @@ import { useLocalStorage } from "react-use";
 
 function GameList() {
   const [items, setItems, removeItems] = useLocalStorage("items", []);
+  let content;
 
-  console.log(items[0][0].name);
+  // console.log(items[0][0].name);
 
   const dataList = items.map((item, i) => {
     const title = items[i][0].name;
@@ -35,7 +36,19 @@ function GameList() {
       </div>
     );
   });
-  return <div>{dataList}</div>;
+
+  if (items[0] == null) {
+    content = (
+      <div>
+        {" "}
+        <h2>You have no games in your list :(</h2>{" "}
+        <p>Please add come back once you add some</p>
+      </div>
+    );
+  } else {
+    content = <div>{dataList}</div>;
+  }
+  return <div>{content}</div>;
 }
 
 export default GameList;

@@ -13,11 +13,11 @@ import useGameItem from "../custom-hooks/use-game-item";
 function AddGame() {
   let { slug } = useParams();
 
-  if (slug === "") {
-    console.log("There is no ID in the URL");
-    slug = "grand-theft-auto-v";
-  }
-  console.log(`This is the ID: ${slug}`);
+  // if (slug === "") {
+  //   console.log("There is no ID in the URL");
+  //   slug = "grand-theft-auto-v";
+  // }
+  // console.log(`This is the ID: ${slug}`);
 
   const [isLoading, errorMessage, data] = useGameItem(slug);
   // if (data === null) {
@@ -29,16 +29,20 @@ function AddGame() {
   // }
   // const { name, rating, released, background_image } = data;
 
-  console.log(data);
+  // console.log(data);
 
   const [category, setCategory] = useState("Playing");
   const [items, setItems, removeItems] = useLocalStorage("items", []);
+  const [success, setSuccess] = useState("");
+  const [disable, setDisable] = useState(false);
   let info;
+
   const [myRating, setMyRating] = useState();
   const history = useHistory();
 
   const onCategoryChange = (event) => {
     setCategory(event.target.value);
+    setDisable(false);
   };
   const onRatingChange = (event) => {
     let num = event.target.value;
@@ -49,16 +53,19 @@ function AddGame() {
       num = 5;
     }
     setMyRating(num);
+    setDisable(false);
   };
   const onSave = (event) => {
     addPlayerData();
-    console.log("==================");
-    console.log(info[0]);
+    // console.log("==================");
+    // console.log(info[0]);
     setItems([...items, info]);
-    console.log("-----------------------");
-    console.log(items[0]);
-    console.log(items[0][0].name);
-    console.log("--------------------");
+    // console.log("-----------------------");
+    // console.log(items[0]);
+    // console.log(items[0][0].name);
+    // console.log("--------------------");
+    setSuccess(<p>✨You successfully added "{data.name}" to your list!!✨</p>);
+    setDisable(true);
   };
 
   function addPlayerData() {
@@ -125,7 +132,10 @@ function AddGame() {
           </p>
         </form>
         <button onClick={() => history.push(`/all-games`)}>Cancel</button>
-        <button onClick={onSave}>Save</button>
+        <button disabled={disable} onClick={onSave}>
+          Save
+        </button>
+        {success}
       </div>
     );
   }

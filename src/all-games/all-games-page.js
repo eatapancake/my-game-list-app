@@ -60,8 +60,8 @@ function AllGamesPage() {
 
   return (
     <main>
-      All Games 🎮🎱🎲🏓
-      <h2>The Games we present to you</h2>
+      <h1>All Games 🎮</h1>
+
       {contents}
       <button onClick={onButtonClick}>{"Next -->"}</button>
       <div className="all-games-page">
