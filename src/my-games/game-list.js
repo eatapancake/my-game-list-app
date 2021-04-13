@@ -1,6 +1,7 @@
 import React from "react";
 // import gameData from "./game-data";
 import { useLocalStorage } from "react-use";
+import { Delete, Edit } from "@material-ui/icons";
 
 function GameList() {
   const [items, setItems, removeItems] = useLocalStorage("items", []);
@@ -18,6 +19,13 @@ function GameList() {
     const ratingString = "⭐".repeat(myRating) + " ◽ ".repeat(5 - myRating);
     const category = items[i][0].playerCategory;
 
+    const onDeleteClick = (event) => {
+      items.splice(i, 1);
+      const oops = items;
+      setItems(oops);
+      console.log("fuck");
+    };
+
     return (
       <div key={title}>
         <h2>
@@ -31,6 +39,9 @@ function GameList() {
           <li>My rating: {ratingString} </li>
         </ul>
         <p>Currently: {category}</p>
+        <button onClick={onDeleteClick}>
+          <Delete />
+        </button>
 
         <p>-----------------------------</p>
       </div>

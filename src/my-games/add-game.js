@@ -33,6 +33,7 @@ function AddGame() {
 
   const [category, setCategory] = useState("Playing");
   const [items, setItems, removeItems] = useLocalStorage("items", []);
+  const [checkUpdate, setCheckUpdate] = useState();
   const [success, setSuccess] = useState("");
   const [disable, setDisable] = useState(false);
   let info;
@@ -57,8 +58,15 @@ function AddGame() {
   };
   const onSave = (event) => {
     addPlayerData();
+
     // console.log("==================");
     // console.log(info[0]);
+    for (let i = 0; i < items.length; i++) {
+      if (items[i][0].name === data.name) {
+        items.splice(i, 1);
+      }
+    }
+
     setItems([...items, info]);
     // console.log("-----------------------");
     // console.log(items[0]);
