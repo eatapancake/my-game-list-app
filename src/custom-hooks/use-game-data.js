@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useEffect } from "react";
 
-function useGameData(pageNum) {
+function useGameData(pageNum, order) {
   const [gameFetch, setGameFetch] = useState({
     isLoading: true,
     errorMessage: "",
@@ -37,12 +37,14 @@ function useGameData(pageNum) {
         const params = new URLSearchParams({
           key: "df69e0f535954c1897d3d33f2c4169bf",
           page: pageNum,
+          ordering: order,
         });
 
         const url2 = `https://api.rawg.io/api/games?${params.toString()}`;
         const response = await fetch(url2, { method: `GET`, headers: headers });
         const json = await response.json();
         const { results } = json;
+
         // console.log(next);
 
         setGameFetch({
@@ -57,7 +59,7 @@ function useGameData(pageNum) {
       }
     }
     main();
-  }, [pageNum]);
+  }, [pageNum, order]);
 
   const { isLoading, errorMessage, data } = gameFetch;
   return [isLoading, errorMessage, data];

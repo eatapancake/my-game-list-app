@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-// import {useEffect} from "react"
-// import showGame from "./props/games-showing";
-// import mainContent from "./Components/mainContent";
-// import sidebar from "./Components/sidebar";
 import "./props/all-games.css";
 import useGameData from "../custom-hooks/use-game-data";
 import LoadingSpinner from "../common/loading-spinner";
@@ -13,9 +9,26 @@ import { useHistory } from "react-router-dom";
 function AllGamesPage() {
   const [userSearch, setUserSearch] = useState("");
   const [pageNum, setPageNum] = useState(1);
-  const [isLoading, errorMessage, data] = useGameData(pageNum);
+  const [order, setOrder] = useState("bloop");
+  const [isLoading, errorMessage, data] = useGameData(pageNum, order);
   const history = useHistory();
 
+  const options = [
+    "added",
+    "name",
+    "released",
+
+    "created",
+    "updated",
+    "rating",
+    "metacritic",
+  ];
+
+  const myOptions = options.map((item, i) => (
+    <option key={i} value={item}>
+      {item}
+    </option>
+  ));
   const onButtonClick = (event) => {
     setPageNum(pageNum + 1);
   };
@@ -25,6 +38,12 @@ function AllGamesPage() {
   };
   const onSearchButtonClick = () =>
     history.push(`/add-game-search/${userSearch}`);
+  const onFilterChange = (event) => {
+    const sortBy = event.target.value;
+
+    setOrder(`-${sortBy}`);
+    console.log(order);
+  };
 
   let contents;
   if (isLoading) contents = <LoadingSpinner />;
@@ -42,23 +61,13 @@ function AllGamesPage() {
           Search
         </button>{" "}
       </div>
+      <label>Sort By: </label>
 
+      <select onChange={onFilterChange}>{myOptions}</select>
       {contents}
       <button className="all_games__button" onClick={onButtonClick}>
         {"Next -->"}
       </button>
-      {/* <div className="all-games-page"> */}
-      {/* <h2>Game search with the API</h2>
-        <div className="">
-          <sidebar topGame={topGame} />
-          <mainContent
-            HandleSearch={HandleSearch}
-            search={search}
-            SetSearch={SetSearch}
-            gameList={gameList}
-          />
-        </div> */}
-      {/* </div> */}
     </main>
   );
 }
