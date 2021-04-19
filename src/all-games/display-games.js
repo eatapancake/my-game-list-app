@@ -17,6 +17,9 @@ function DisplayGames({ gameData }) {
 
     return (
       <div key={id}>
+        <p>
+          <br></br>
+        </p>
         <GameList
           id={id}
           slug={slug}

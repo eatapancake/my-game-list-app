@@ -9,11 +9,10 @@ import React from "react";
 function GameList({ id, name, released, background_image, rating }) {
   return (
     <div>
-      <h3>
-        {" "}
-        {name} ({released}){" "}
-      </h3>
-      <p>Rating: {rating}</p>
+      <h3> {name} </h3>
+      <p>
+        Rating: {rating} | Released: {released}{" "}
+      </p>
       <img id={name} src={background_image} alt={name} width="700" />
     </div>
   );
