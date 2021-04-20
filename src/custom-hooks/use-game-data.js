@@ -34,12 +34,20 @@ function useGameData(pageNum, order, filter) {
 
       console.log("Fetch initiated..! 🦴");
       try {
-        const params = new URLSearchParams({
+        var params = new URLSearchParams({
           key: "df69e0f535954c1897d3d33f2c4169bf",
           page: pageNum,
           ordering: order,
           genres: filter,
         });
+
+        if (filter === "") {
+          params = new URLSearchParams({
+            key: "df69e0f535954c1897d3d33f2c4169bf",
+            page: pageNum,
+            ordering: order,
+          });
+        }
 
         const url2 = `https://api.rawg.io/api/games?${params.toString()}`;
         const response = await fetch(url2, { method: `GET`, headers: headers });

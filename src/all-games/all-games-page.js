@@ -24,6 +24,7 @@ function AllGamesPage() {
     "metacritic",
   ];
   const filterOptions = [
+    "",
     "action",
     "strategy",
     "rpg",
