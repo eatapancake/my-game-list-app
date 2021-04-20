@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import PageHeader from "./common/page-header.js";
 import HomePage from "./home/home-page.js";
 import AllGamesPage from "./all-games/all-games-page.js";
@@ -8,28 +8,55 @@ import "./app.css";
 import GameDetails from "./game-details/game-details.js";
 import AddGameSearch from "./my-games/add-game-search.js";
 
+import { auth } from "./data/firebase";
+import { useState, useEffect } from "react";
+
+function AuthenicatedRoute(props) {
+  const { isAuthenticated, children, ...routeProps } = props;
+  return (
+    <Route {...routeProps}>
+      {isAuthenticated ? children : <Redirect to="/account" />}{" "}
+    </Route>
+  );
+}
 function App() {
+  const [user, setUser] = useState(null);
+  const isAuthenticated = user !== null;
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+    return unsubscribe;
+  }, []);
+
   return (
     <BrowserRouter>
-      <PageHeader></PageHeader>
+      <PageHeader user={user}></PageHeader>
+
       <Switch>
         <Route path="/" exact>
-          <HomePage />
+          <HomePage user={user} />
         </Route>
+
         <Route path="/all-games">
-          <AllGamesPage />
+          <AllGamesPage user={user} isAuthenticated={isAuthenticated} />
         </Route>
+
         <Route path="/my-games">
-          <MyGamesPage />
+          <MyGamesPage user={user} isAuthenticated={isAuthenticated} />
         </Route>
+
         <Route path="/add-game/:slug">
-          <AddGame />
+          <AddGame user={user} isAuthenticated={isAuthenticated} />
         </Route>
+
         <Route path="/add-game-search/:slug">
-          <AddGameSearch />
+          <AddGameSearch user={user} isAuthenticated={isAuthenticated} />
         </Route>
+
         <Route path="/game-details/:slug">
-          <GameDetails />
+          <GameDetails user={user} isAuthenticated={isAuthenticated} />
         </Route>
       </Switch>
     </BrowserRouter>
