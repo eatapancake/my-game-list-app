@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useEffect } from "react";
 
-function useGameData(pageNum, order) {
+function useGameData(pageNum, order, filter) {
   const [gameFetch, setGameFetch] = useState({
     isLoading: true,
     errorMessage: "",
@@ -38,6 +38,7 @@ function useGameData(pageNum, order) {
           key: "df69e0f535954c1897d3d33f2c4169bf",
           page: pageNum,
           ordering: order,
+          genres: filter,
         });
 
         const url2 = `https://api.rawg.io/api/games?${params.toString()}`;
@@ -59,7 +60,7 @@ function useGameData(pageNum, order) {
       }
     }
     main();
-  }, [pageNum, order]);
+  }, [pageNum, order, filter]);
 
   const { isLoading, errorMessage, data } = gameFetch;
   return [isLoading, errorMessage, data];

@@ -10,21 +10,36 @@ function AllGamesPage() {
   const [userSearch, setUserSearch] = useState("");
   const [pageNum, setPageNum] = useState(1);
   const [order, setOrder] = useState("bloop");
-  const [isLoading, errorMessage, data] = useGameData(pageNum, order);
+  const [filter, setFilter] = useState("");
+  const [isLoading, errorMessage, data] = useGameData(pageNum, order, filter);
   const history = useHistory();
 
   const options = [
     "added",
     "name",
     "released",
-
     "created",
     "updated",
     "rating",
     "metacritic",
   ];
+  const filterOptions = [
+    "action",
+    "strategy",
+    "rpg",
+    "shooter",
+    "adventure",
+    "puzzle",
+    "racing",
+    "sports",
+  ];
 
   const myOptions = options.map((item, i) => (
+    <option key={i} value={item}>
+      {item}
+    </option>
+  ));
+  const myFilter = filterOptions.map((item, i) => (
     <option key={i} value={item}>
       {item}
     </option>
@@ -38,11 +53,14 @@ function AllGamesPage() {
   };
   const onSearchButtonClick = () =>
     history.push(`/add-game-search/${userSearch}`);
-  const onFilterChange = (event) => {
+  const onSortChange = (event) => {
     const sortBy = event.target.value;
-
     setOrder(`-${sortBy}`);
     console.log(order);
+  };
+  const onFilterChange = (event) => {
+    const filterBy = event.target.value;
+    setFilter(filterBy);
   };
 
   let contents;
@@ -61,9 +79,10 @@ function AllGamesPage() {
           Search
         </button>{" "}
       </div>
-      <label>Sort By: </label>
-
-      <select onChange={onFilterChange}>{myOptions}</select>
+      <label> Sort By: </label>
+      <select onChange={onSortChange}>{myOptions}</select>{" "}
+      <label>Filter By Genre: </label>{" "}
+      <select onChange={onFilterChange}>{myFilter}</select>
       {contents}
       <button className="all_games__button" onClick={onButtonClick}>
         {"Next -->"}
