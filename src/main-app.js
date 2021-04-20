@@ -26,9 +26,12 @@ function App() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
+      if (user !== null) {
+        console.log(user.uid);
+      }
     });
     return unsubscribe;
-  }, []);
+  }, [user]);
 
   return (
     <BrowserRouter>
@@ -39,24 +42,30 @@ function App() {
           <HomePage user={user} />
         </Route>
 
-        <AuthenicatedRoute path="/all-games">
-          <AllGamesPage user={user} isAuthenticated={isAuthenticated} />
+        <AuthenicatedRoute path="/all-games" isAuthenticated={isAuthenticated}>
+          <AllGamesPage user={user} />
         </AuthenicatedRoute>
 
-        <AuthenicatedRoute path="/my-games">
-          <MyGamesPage user={user} isAuthenticated={isAuthenticated} />
+        <AuthenicatedRoute path="/my-games" isAuthenticated={isAuthenticated}>
+          <MyGamesPage user={user} />
         </AuthenicatedRoute>
 
-        <AuthenicatedRoute path="/add-game/:slug">
-          <AddGame user={user} isAuthenticated={isAuthenticated} />
+        <AuthenicatedRoute
+          path="/add-game/:slug"
+          isAuthenticated={isAuthenticated}
+        >
+          <AddGame user={user} />
         </AuthenicatedRoute>
 
-        <AuthenicatedRoute path="/add-game-search/:slug">
-          <AddGameSearch user={user} isAuthenticated={isAuthenticated} />
+        <AuthenicatedRoute
+          path="/add-game-search/:slug"
+          isAuthenticated={isAuthenticated}
+        >
+          <AddGameSearch user={user} />
         </AuthenicatedRoute>
 
-        <Route path="/game-details/:slug">
-          <GameDetails user={user} isAuthenticated={isAuthenticated} />
+        <Route path="/game-details/:slug" isAuthenticated={isAuthenticated}>
+          <GameDetails user={user} />
         </Route>
       </Switch>
     </BrowserRouter>
