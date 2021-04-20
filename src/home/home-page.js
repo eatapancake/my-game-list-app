@@ -29,8 +29,8 @@ function HomePage(props) {
 
   return (
     <main className="home">
-      <h1>Home</h1>
-      <p>This is the home page.</p>
+      <h1>Account Log in</h1>
+      {/* <p>This is the home page.</p>
       <p>
         Made by Josh, Janet, and Justin we are all working throughout the
         website and will try to update it whenever we can!
@@ -44,7 +44,7 @@ function HomePage(props) {
         categorize or review on your own play experience. We'll provide games
         you might be interested and provide the information of the developers
         that made it and the game its compatible with.
-      </p>
+      </p> */}
       <LoginTest user={props.user} />
       {/* <div className="home2">
         {user.email != "" ? (

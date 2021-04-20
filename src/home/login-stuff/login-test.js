@@ -38,7 +38,7 @@ function LoginTest(props) {
     contents = (
       <>
         <p>Welcome back, {displayName}! You can log out below</p>
-        <button className="login-form__button" onClick={signOut}>
+        <button onClick={signOut}>
           {" "}
           {isLoading ? "Logging Out..." : "Log Out"}
         </button>
@@ -47,24 +47,19 @@ function LoginTest(props) {
   } else {
     contents = (
       <>
-        <p className="account-paragraph">
+        <p>
           You can log in or create an account by linking your Google Account.
           Follow the instructions in the pop up window.{" "}
         </p>
-        <button
-          className="login-form__button"
-          onClick={signIn}
-          disabled={isLoading}
-        >
+        <button onClick={signIn} disabled={isLoading}>
           {isLoading ? "Logging In..." : "Log In"}
         </button>
       </>
     );
   }
   return (
-    <div className="account-container">
-      <h1>Account Info</h1>
-      <div className="login-form">
+    <div>
+      <div>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         {contents}
       </div>

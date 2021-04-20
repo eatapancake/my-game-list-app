@@ -15,7 +15,7 @@ function AuthenicatedRoute(props) {
   const { isAuthenticated, children, ...routeProps } = props;
   return (
     <Route {...routeProps}>
-      {isAuthenticated ? children : <Redirect to="/account" />}{" "}
+      {isAuthenticated ? children : <Redirect to="/" />}{" "}
     </Route>
   );
 }
@@ -39,21 +39,21 @@ function App() {
           <HomePage user={user} />
         </Route>
 
-        <Route path="/all-games">
+        <AuthenicatedRoute path="/all-games">
           <AllGamesPage user={user} isAuthenticated={isAuthenticated} />
-        </Route>
+        </AuthenicatedRoute>
 
-        <Route path="/my-games">
+        <AuthenicatedRoute path="/my-games">
           <MyGamesPage user={user} isAuthenticated={isAuthenticated} />
-        </Route>
+        </AuthenicatedRoute>
 
-        <Route path="/add-game/:slug">
+        <AuthenicatedRoute path="/add-game/:slug">
           <AddGame user={user} isAuthenticated={isAuthenticated} />
-        </Route>
+        </AuthenicatedRoute>
 
-        <Route path="/add-game-search/:slug">
+        <AuthenicatedRoute path="/add-game-search/:slug">
           <AddGameSearch user={user} isAuthenticated={isAuthenticated} />
-        </Route>
+        </AuthenicatedRoute>
 
         <Route path="/game-details/:slug">
           <GameDetails user={user} isAuthenticated={isAuthenticated} />
