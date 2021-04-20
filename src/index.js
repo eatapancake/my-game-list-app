@@ -9,3 +9,22 @@ ReactDOM.render(
   </React.StrictMode>,
   document.querySelector("#root")
 );
+/* 
+async function readAllusers(){
+  try{
+    const collectionRef = db.collection("users");
+    const getPromise = collectionRef.get();
+    const snapshot = await getPromise;
+    
+    console.log(`Found ${snapshot.size}x user(s).`);
+
+  } catch (err){
+    console.error(err);
+  }
+
+  }
+  readAllusers();
+
+ */
+
+console.log(db);
