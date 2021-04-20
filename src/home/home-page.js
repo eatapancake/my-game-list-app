@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LoginForm from './login-stuff/LoginForm';
+import {auth, provider} from "../data/firebase";
 //import "./home.css"
 
 function HomePage() {
@@ -12,21 +13,30 @@ password: "admin123"
   const [user, setUser] = useState({name: "", email: ""});
   const [error, setError] = useState("");
 
-
-  const Login = details => {
-    console.log(details);
-    if(details.email == adminUser.email && details.password == adminUser.password)
-    {
-      console.log("logged in");
-      setUser({
-        name: details.name,
-        email: details.email
-      });
-    } else{
-      console.log("Details does not match");
-      setError();
+  const signIn = async () => {
+    try {
+      const credentials = await auth.signInWithPopup(provider);
+      console.log("signed in!");
+      console.log(credentials);
+    } catch (error) {
+      console.error(error);
     }
   }
+
+  // const Login = details => {
+  //   console.log(details);
+  //   if(details.email == adminUser.email && details.password == adminUser.password)
+  //   {
+  //     console.log("logged in");
+  //     setUser({
+  //       name: details.name,
+  //       email: details.email
+  //     });
+  //   } else{
+  //     console.log("Details does not match");
+  //     setError();
+  //   }
+  // }
 
   const Logout = () => {
     setUser({name: "", email: ""})
@@ -57,7 +67,8 @@ password: "admin123"
           <button onClick={Logout}>Logout</button>
         </div>
       ) : (
-        <LoginForm Login={Login} error={error} />
+        // <LoginForm Login={Login} error={error} />
+        <button onClick= {signIn}> Sign In</button>
       )}
   
       </div>

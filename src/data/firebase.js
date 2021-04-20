@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 
 import "firebase/firestore";
+import "firebase/auth";
 
 const firebaseConfig =
 {
@@ -24,5 +25,7 @@ if(!firebaseConfig.measurementId) throw new Error("Missing Firebase credential: 
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
 
-export {db, firebase};
+export {db, auth, provider, firebase};
