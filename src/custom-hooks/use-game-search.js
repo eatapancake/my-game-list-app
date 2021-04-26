@@ -7,6 +7,23 @@ function useGameSearch(slug) {
     data: null,
   });
 
+  // useEffect(() => {
+  //   function decodeGameData(results) {
+  //     //Decode the Game data
+  //     const decodedResults = results.map((item) => {
+  //       return {
+  //         id: item.id,
+  //         slug: item.slug,
+  //         name: item.name,
+  //         summary: item.description,
+  //         released: item.released,
+  //         background_image: item.background_image,
+  //         rating: item.rating,
+  //       };
+  //     });
+  //     return decodedResults;
+  //   }
+
   useEffect(() => {
     //grand-theft-auto-v
     function decodeGameData(results) {
@@ -33,7 +50,7 @@ function useGameSearch(slug) {
         const response = await fetch(url, { method: `GET`, headers: headers });
         const json = await response.json();
         const { results } = json;
-
+        console.log(results);
         setGameFetch({
           isLoading: false,
           errorMessage: "",

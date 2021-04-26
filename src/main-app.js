@@ -10,6 +10,7 @@ import AddGameSearch from "./my-games/add-game-search.js";
 
 import { auth } from "./data/firebase";
 import { useState, useEffect } from "react";
+import SearchPage from "./my-games/search-page.js";
 
 function AuthenicatedRoute(props) {
   const { isAuthenticated, children, ...routeProps } = props;
@@ -62,6 +63,13 @@ function App() {
           isAuthenticated={isAuthenticated}
         >
           <AddGameSearch user={user} />
+        </AuthenicatedRoute>
+
+        <AuthenicatedRoute
+          path="/search-page/:slug"
+          isAuthenticated={isAuthenticated}
+        >
+          <SearchPage user={user} />
         </AuthenicatedRoute>
 
         <Route path="/game-details/:slug" isAuthenticated={isAuthenticated}>

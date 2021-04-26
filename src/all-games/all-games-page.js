@@ -52,8 +52,7 @@ function AllGamesPage() {
     setUserSearch(event.target.value);
     console.log(userSearch);
   };
-  const onSearchButtonClick = () =>
-    history.push(`/add-game-search/${userSearch}`);
+  const onSearchButtonClick = () => history.push(`/search-page/${userSearch}`);
   const onSortChange = (event) => {
     const sortBy = event.target.value;
     setOrder(`-${sortBy}`);
