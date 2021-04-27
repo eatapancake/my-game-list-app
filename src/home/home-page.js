@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LoginForm from "./login-stuff/LoginForm";
 import { auth, provider } from "../data/firebase";
 import LoginTest from "./login-stuff/login-test";
+import GetOneUser from "../data/get-one-user";
 //import "./home.css"
 
 function HomePage(props) {
@@ -46,6 +47,7 @@ function HomePage(props) {
         that made it and the game its compatible with.
       </p> */}
       <LoginTest user={props.user} />
+      <GetOneUser />
       {/* <div className="home2">
         {user.email != "" ? (
           <div className="welcome">

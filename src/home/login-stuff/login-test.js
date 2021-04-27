@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { provider, auth } from "../../data/firebase";
+import { provider, auth, db } from "../../data/firebase";
 import ErrorMessage from "../../common/error-message";
 
 function LoginTest(props) {
@@ -32,9 +32,30 @@ function LoginTest(props) {
     setIsLoading(false);
   };
 
+  // const signInEx1 = async () => {
+
+  //   setIsLoading(true);
+  //   setErrorMessage(null);
+
+  //   var docRef = db.collection("users").doc("5br0JLUGBUDTzUAeCQCz");
+  //   const displayName = "5br0JLUGBUDTzUAeCQCz";
+
+  //   docRef.get().then((doc) => {
+  //     if (doc.exists) {
+  //         console.log("Document data:", doc.data());
+  //     } else {
+  //         console.log("No such document!");
+  //     }
+
+  // }).catch((error) => {
+  //     console.log("Error getting document:", error);
+  // });
+  // setIsLoading(false);
+  // };
+
   let contents;
   if (user) {
-    const { displayName } = user;
+    const { displayName} = user;
     contents = (
       <>
         <p>Welcome back, {displayName}! You can log out below</p>
@@ -54,6 +75,9 @@ function LoginTest(props) {
         <button onClick={signIn} disabled={isLoading}>
           {isLoading ? "Logging In..." : "Log In"}
         </button>
+        {/* <button onClick= {signInEx1} disabled={isLoading}>
+          {isLoading ? "Logging In..." : "Log In as example person 1"}
+        </button> */}
       </>
     );
   }
