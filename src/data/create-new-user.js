@@ -1,6 +1,5 @@
-import {useState} from "react";
+import { useState } from "react";
 import { db } from "./firebase";
-
 
 /* 
 async function createUser(user) 
@@ -22,45 +21,51 @@ createUser({
 }); 
 */
 
-function CreateNewUser() {
-    const [gameName, setgameName] = useState("");
-    const [date, setDate] = useState("");
-    const clicker = async () => {
+// async function CreateNewUser(gameImage, status, ratingUser, ratingAll) {
+//   const [gameName, setgameName] = useState("");
+//   const [date, setDate] = useState("");
+//   const clicker = async () => {
+//     try {
+//       const docRef = await db.collection("users").add({
+// gameName,
+// gameImage,
+// date,
+// status,
+// ratingAll,
+// ratingUser,
+//       });
+//       console.log(`Successfully added new user at ${docRef.id}`);
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
 
-        try{
-            const docRef = await db.collection("users").add({
-                gameName,
-                gameImage,
-                date,
-                status,
-                ratingAll,
-                ratingUser,
+//   return (
+//     <div>
+//       <div>
+//         <h3>Creating new input</h3>
+//         <label>
+//           game name:{" "}
+//           <input
+//             type="text"
+//             value={gameName}
+//             onChange={(e) => setgameName(e.target.value)}
+//           />
+//         </label>
+//         <label>
+//           data:{" "}
+//           <input
+//             type="text"
+//             value={date}
+//             onChange={(e) => setDate(e.target.value)}
+//           />
+//         </label>
+//       </div>
+//       <div>
+//         <button onClick={clicker}>Creates game </button>
+//       </div>
+//     </div>
+//   );
+// }
 
-            });
-            console.log(`Successfully added new user at ${docRef.id}`);
-          } catch(err) {
-            console.error(err);
-          }
-    }
-
-
-    return (
-        <div>
-        <div>
-            <h3>Creating new input</h3>
-            <label>
-                game name:{" "} <input type = "text" value={gameName} onChange={(e) => setgameName(e.target.value)}/>
-            </label>
-            <label>
-                data:{" "} <input type = "text" value={date} onChange={(e) => setDate(e.target.value)}/>
-            </label>
-        </div>
-        <div>
-            <button onClick={clicker}>Creates game </button>
-        </div>
-
-        </div>
-    )
-}
-
-export default CreateNewUser;
+// export default CreateNewUser;

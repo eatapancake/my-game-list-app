@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./main-app";
-import {db} from "./data/firebase";
+import { db } from "./data/firebase";
 import "./index.css";
-
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,8 +12,17 @@ ReactDOM.render(
 );
 
 async function readAllUsers() {
-  try{
+  try {
     const snapshot = await db.collection("users").get();
+
+    const snapshot2 = await db
+      .collection("users")
+      .doc("5br0JLUGBUDTzUAeCQCz")
+      .get();
+
+    const doc = snapshot2.data();
+
+    console.log("Doc Data:", doc.games[0]);
 
     console.log(`Found ${snapshot.size}x users.`);
     const docs = snapshot.docs;
