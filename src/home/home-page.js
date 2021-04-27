@@ -3,6 +3,11 @@ import LoginForm from "./login-stuff/LoginForm";
 import { auth, provider } from "../data/firebase";
 import LoginTest from "./login-stuff/login-test";
 import GetOneUser from "../data/get-one-user";
+import CreateNewUser from '../data/create-new-user';
+import Deleteuser from '../data/delete-user';
+import GetAllUsers from '../data/get-all-users';
+import GetOneUser from '../data/get-one-user';
+import UpdateUser from '../data/update-user';
 //import "./home.css"
 
 function HomePage(props) {
@@ -62,6 +67,11 @@ function HomePage(props) {
         )} */}
       {/*         
       </div> */}
+     <GetAllUsers/>
+      <GetOneUser/>
+      <CreateNewUser/>
+      <UpdateUser/>
+      <Deleteuser/>
     </main>
   );
 }
