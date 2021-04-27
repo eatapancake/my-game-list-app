@@ -5,14 +5,14 @@ function useSaveGame() {
   const [isSaving, setIsSaving] = useState(false);
   const [formMessage, setFormMessage] = useState("");
 
-  const save = async (plantData, userId, plantId) => {
+  const save = async (gameData, userId, gameId) => {
     setIsSaving(true);
     setFormMessage("");
     try {
-      if (plantId === undefined) {
-        await db.doc(userId).collection("plants").add(plantData);
+      if (gameId === undefined) {
+        await db.collection("users").doc(userId).doc("games").add(gameData);
       } else {
-        await db.doc(userId).collection("plants").doc(plantId).set(plantData);
+        // await db.doc(userId).collection("games").doc(gameId).set(gameData);
       }
 
       console.log("Saved");
