@@ -10,6 +10,20 @@ ReactDOM.render(
   </React.StrictMode>,
   document.querySelector("#root")
 );
+
+async function readAllUsers() {
+  try{
+    const snapshot = await db.collection("users").get();
+
+    console.log(`Found ${snapshot.size}x users.`);
+    const docs = snapshot.docs;
+    docs.forEach((docSnapshot) => {
+      console.log(docSnapshot.id, docSnapshot.data());
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
 /* 
 async function readAllusers(){
   try{
@@ -27,5 +41,5 @@ async function readAllusers(){
   readAllusers();
 
  */
-
+readAllUsers();
 console.log(db);
