@@ -68,6 +68,7 @@ function useGameData(pageNum, order, filter) {
       }
     }
     main();
+    // eslint-disable-next-line
   }, [pageNum, order, filter]);
 
   const { isLoading, errorMessage, data } = gameFetch;

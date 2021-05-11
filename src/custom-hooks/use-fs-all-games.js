@@ -28,6 +28,7 @@ function useFsAllGames(userID) {
       .orderBy("name", "desc")
       .onSnapshot(onNext, onError);
     return unsubscribe;
+    // eslint-disable-next-line
   }, []);
 
   return [games, isLoading, errorMessage];
