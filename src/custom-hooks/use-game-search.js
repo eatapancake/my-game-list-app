@@ -7,22 +7,6 @@ function useGameSearch(slug) {
     data: null,
   });
 
-  // useEffect(() => {
-  //   function decodeGameData(results) {
-  //     //Decode the Game data
-  //     const decodedResults = results.map((item) => {
-  //       return {
-  //         id: item.id,
-  //         slug: item.slug,
-  //         name: item.name,
-  //         summary: item.description,
-  //         released: item.released,
-  //         background_image: item.background_image,
-  //         rating: item.rating,
-  //       };
-  //     });
-  //     return decodedResults;
-  //   }
 
   useEffect(() => {
     //grand-theft-auto-v
