@@ -7,11 +7,12 @@ import "./game-list.css";
 import useFsAllGames from "../custom-hooks/use-fs-all-games";
 import LoadingSpinner from "../common/loading-spinner";
 import ErrorMessage from "../common/error-message";
+import { db } from "../data/firebase";
 
 function GameList(props) {
   const userId = props.user.uid;
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading] = useState(false);
+  const [errorMessage] = useState("");
   const [items, setItems] = useLocalStorage("items", []);
 
   const [games, isLoading2, errorMessage_2] = useFsAllGames(userId);
@@ -21,6 +22,7 @@ function GameList(props) {
   // let gameList;
 
   // try {
+  console.log(isLoading2, errorMessage_2);
   const gameList = games.map((gameDoc, i) => {
     const gameData = gameDoc.data();
     const title = gameData.name;
@@ -29,16 +31,26 @@ function GameList(props) {
     let rating = Math.round(gameData.rating);
     const myRating = gameData.myRating;
     const category = gameData.category;
+
+    const gameId = gameDoc.id;
+
     if (rating > 5) {
       rating = 5;
     }
     const worldRatingString = "⭐".repeat(rating) + " ◽ ".repeat(5 - rating);
     const ratingString = "⭐".repeat(myRating) + " ◽ ".repeat(5 - myRating);
 
-    const onDeleteClick = () => {
-      items.splice(i, 1);
-      const oops = items;
-      setItems(oops);
+    const onDeleteClick = async () => {
+      try {
+        const docRef = await db
+          .collection("users")
+          .doc(userId)
+          .collection("games")
+          .doc(gameId)
+          .delete();
+
+        console.log("Delete meh");
+      } catch (error) {}
     };
     return (
       <li className="" key={i}>
@@ -106,7 +118,19 @@ function GameList(props) {
   if (isLoading) contents = <LoadingSpinner />;
   else if (errorMessage !== "")
     contents = <ErrorMessage>{errorMessage}</ErrorMessage>;
-  else contents = <ul className="game-list">{gameList}</ul>;
+  else {
+    if (games[0] === undefined) {
+      contents = (
+        <div>
+          {" "}
+          <h2>You have no games in your list :(</h2>{" "}
+          <p>Please come back once you add some</p>
+        </div>
+      );
+    } else {
+      contents = <ul className="game-list">{gameList}</ul>;
+    }
+  }
 
   // if (items[0] == null) {
   //   content = (

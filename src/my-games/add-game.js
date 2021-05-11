@@ -16,12 +16,24 @@ import "./game-list.css";
 function AddGame(props) {
   let { slug } = useParams();
   const userId = props.user.uid;
-  // const [gameId, setGameId] = useState();
+
+  const [saveGame, isSaving, formMessage] = useFsSaveGame();
+  const [isLoading, errorMessage, data] = useGameItem(slug);
+  const [category, setCategory] = useState("Playing");
+  const [items, setItems] = useLocalStorage("items", []);
+  const [success, setSuccess] = useState("");
+  const [disable, setDisable] = useState(false);
+
+  const [myRating, setMyRating] = useState(0);
+  const history = useHistory();
+
+  let info;
 
   async function checkUpdate(newName) {
     let gameId = undefined;
 
     try {
+      console.log(isSaving, formMessage);
       const name = data.name;
       const background_image = data.background_image;
       const released = data.released;
@@ -34,7 +46,6 @@ function AddGame(props) {
         .get();
 
       snapshot.forEach((docSnap) => {
-        // gameId = docSnap.id;
         const gameName = docSnap.data().name;
 
         if (newName === gameName) {
@@ -59,41 +70,6 @@ function AddGame(props) {
     }
   }
 
-  const [saveGame, isSaving, formMessage] = useFsSaveGame();
-
-  // if (slug === "") {
-  //   console.log("There is no ID in the URL");
-  //   slug = "grand-theft-auto-v";
-  // }
-  // console.log(`This is the ID: ${slug}`);
-
-  const [isLoading, errorMessage, data] = useGameItem(slug);
-  // const name = data.name;
-  // const background_image = data.background_image;
-  // const released = data.released;
-  // const rating = data.rating;
-
-  // if (data === null) {
-  // const name = "o";
-  // const rating = "o";
-  // const released = "o";
-  // const background_image =
-  //   "https://media.rawg.io/media/games/84d/84da2ac3fdfc6507807a1808595afb12.jpg";
-  // }
-  // const { name, rating, released, background_image } = data;
-
-  // console.log(data);
-
-  const [category, setCategory] = useState("Playing");
-  const [items, setItems] = useLocalStorage("items", []);
-  const [success, setSuccess] = useState("");
-  const [disable, setDisable] = useState(false);
-
-  let info;
-
-  const [myRating, setMyRating] = useState(0);
-  const history = useHistory();
-
   const onCategoryChange = (event) => {
     setCategory(event.target.value);
     setDisable(false);
@@ -105,7 +81,6 @@ function AddGame(props) {
     if (num < min) setMyRating(min);
     else if (num > max) setMyRating(max);
     else {
-      // num = Number.parseInt(num);
       num = Math.round(num);
       setMyRating(num);
     }
