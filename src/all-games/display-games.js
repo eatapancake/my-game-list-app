@@ -4,12 +4,6 @@ import { useHistory } from "react-router-dom";
 import "../all-games/props/all-games.css";
 import "../my-games/game-list.css";
 
-//  item.id,
-//  name: item.name,
-//  released: item.released,
-//  background_image: item.background_image,
-//  rating: item.rating,
-
 function DisplayGames({ gameData }) {
   const history = useHistory();
   const gameListItems = gameData.map((item, i) => {
