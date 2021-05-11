@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { provider, auth, db } from "../../data/firebase";
+import { provider, auth } from "../../data/firebase";
 import ErrorMessage from "../../common/error-message";
 
 function LoginTest(props) {
@@ -34,7 +34,7 @@ function LoginTest(props) {
 
   let contents;
   if (user) {
-    const { displayName} = user;
+    const { displayName } = user;
     contents = (
       <>
         <p>Welcome back, {displayName}! You can log out below</p>
@@ -54,7 +54,6 @@ function LoginTest(props) {
         <button onClick={signIn} disabled={isLoading}>
           {isLoading ? "Logging In..." : "Log In"}
         </button>
-        
       </>
     );
   }

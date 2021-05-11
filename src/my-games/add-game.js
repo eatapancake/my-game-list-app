@@ -5,6 +5,7 @@ import ErrorMessage from "../common/error-message";
 import LoadingSpinner from "../common/loading-spinner";
 import useGameItem from "../custom-hooks/use-game-item";
 import useFsSaveGame from "../custom-hooks/use-fs-save-game";
+import { db } from "../data/firebase";
 import "./game-list.css";
 
 // name: name,
@@ -15,6 +16,48 @@ import "./game-list.css";
 function AddGame(props) {
   let { slug } = useParams();
   const userId = props.user.uid;
+  // const [gameId, setGameId] = useState();
+
+  async function checkUpdate(newName) {
+    let gameId = undefined;
+
+    try {
+      const name = data.name;
+      const background_image = data.background_image;
+      const released = data.released;
+      const rating = data.rating;
+
+      const snapshot = await db
+        .collection("users")
+        .doc(userId)
+        .collection("games")
+        .get();
+
+      snapshot.forEach((docSnap) => {
+        // gameId = docSnap.id;
+        const gameName = docSnap.data().name;
+
+        if (newName === gameName) {
+          gameId = docSnap.id;
+        }
+      });
+
+      if (gameId === undefined) {
+        saveGame(
+          { name, background_image, released, rating, myRating, category },
+          userId
+        );
+      } else {
+        saveGame(
+          { name, background_image, released, rating, myRating, category },
+          userId,
+          gameId
+        );
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   const [saveGame, isSaving, formMessage] = useFsSaveGame();
 
@@ -45,6 +88,7 @@ function AddGame(props) {
   const [items, setItems] = useLocalStorage("items", []);
   const [success, setSuccess] = useState("");
   const [disable, setDisable] = useState(false);
+
   let info;
 
   const [myRating, setMyRating] = useState(0);
@@ -69,16 +113,7 @@ function AddGame(props) {
     setDisable(false);
   };
   const onSave = (event) => {
-    const name = data.name;
-    const background_image = data.background_image;
-    const released = data.released;
-    const rating = data.rating;
-
-    saveGame(
-      { name, background_image, released, rating, myRating, category },
-      userId
-    );
-
+    checkUpdate(data.name);
     addPlayerData();
     // console.log("==================");
     // console.log(info[0]);

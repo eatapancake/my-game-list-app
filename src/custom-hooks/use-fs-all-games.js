@@ -28,7 +28,7 @@ function useFsAllGames(userID) {
       .orderBy("name", "desc")
       .onSnapshot(onNext, onError);
     return unsubscribe;
-  }, [userID, usersCollection]);
+  }, []);
 
   return [games, isLoading, errorMessage];
 }

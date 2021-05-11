@@ -22,7 +22,7 @@ async function readAllUsers() {
 
     const snapshot_new = await db
       .collection("users")
-      .doc("c3GkyGJIr4NeQpl6816Pp9sC9oI3")
+      .doc("iFFzkg5IxJXTOOg2DIxgroXu2Vh1")
       .collection("games")
       .get();
 

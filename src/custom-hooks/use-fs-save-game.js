@@ -8,6 +8,7 @@ function useFsSaveGame() {
   const save = async (gameData, userId, gameId) => {
     setIsSaving(true);
     setFormMessage("");
+
     try {
       if (gameId === undefined) {
         await db
