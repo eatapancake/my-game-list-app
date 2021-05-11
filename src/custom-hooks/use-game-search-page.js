@@ -24,19 +24,6 @@ function useGameSearchPage(slug) {
       return decodedResults;
     }
 
-    // useEffect(() => {
-    //   //grand-theft-auto-v
-    //   function decodeGameData(results) {
-    //     //Decoding
-    //     const decodedResults = {
-    //       name: results[0].name,
-    //       rating: results[0].rating,
-    //       released: results[0].released,
-    //       background_image: results[0].background_image,
-    //     };
-    //     return decodedResults;
-    //   }
-
     async function getGame() {
       let headers = new Headers({
         "User-Agent": "Team 4's App Project",
