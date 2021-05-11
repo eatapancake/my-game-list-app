@@ -13,7 +13,7 @@ function GameList(props) {
   const userId = props.user.uid;
   const [isLoading] = useState(false);
   const [errorMessage] = useState("");
-  const [items, setItems] = useLocalStorage("items", []);
+  // const [items, setItems] = useLocalStorage("items", []);
 
   const [games, isLoading2, errorMessage_2] = useFsAllGames(userId);
   // console.log(games.doc);
@@ -42,7 +42,7 @@ function GameList(props) {
 
     const onDeleteClick = async () => {
       try {
-        const docRef = await db
+        await db
           .collection("users")
           .doc(userId)
           .collection("games")
