@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import ErrorMessage from "../common/error-message";
 import LoadingSpinner from "../common/loading-spinner";
 import useGameItem from "../custom-hooks/use-game-item";
+import useFsSaveGame from "../custom-hooks/use-fs-save-game";
 import "./game-list.css";
 
 // name: name,
@@ -11,8 +12,11 @@ import "./game-list.css";
 // released: released,
 // background_image,
 
-function AddGame() {
+function AddGame(props) {
   let { slug } = useParams();
+  const userId = props.user.uid;
+
+  const [saveGame, isSaving, formMessage] = useFsSaveGame();
 
   // if (slug === "") {
   //   console.log("There is no ID in the URL");
@@ -21,6 +25,11 @@ function AddGame() {
   // console.log(`This is the ID: ${slug}`);
 
   const [isLoading, errorMessage, data] = useGameItem(slug);
+  // const name = data.name;
+  // const background_image = data.background_image;
+  // const released = data.released;
+  // const rating = data.rating;
+
   // if (data === null) {
   // const name = "o";
   // const rating = "o";
@@ -60,10 +69,20 @@ function AddGame() {
     setDisable(false);
   };
   const onSave = (event) => {
-    addPlayerData();
+    const name = data.name;
+    const background_image = data.background_image;
+    const released = data.released;
+    const rating = data.rating;
 
+    saveGame(
+      { name, background_image, released, rating, myRating, category },
+      userId
+    );
+
+    addPlayerData();
     // console.log("==================");
     // console.log(info[0]);
+
     for (let i = 0; i < items.length; i++) {
       if (items[i][0].name === data.name) {
         items.splice(i, 1);
@@ -91,6 +110,7 @@ function AddGame() {
       },
     ];
   }
+
   let contents;
   if (isLoading) contents = <LoadingSpinner />;
   else if (errorMessage !== "")

@@ -9,7 +9,20 @@ import LoginTest from "./login-stuff/login-test";
 // import UpdateUser from "../data/update-user";
 // //import "./home.css"
 
+// import useFsSaveGame from "../custom-hooks/use-fs-save-game";
+
 function HomePage(props) {
+  //-------------------------------------------------------------------
+  // const [saveGame, isSaving, formMessage] = useFsSaveGame();
+
+  // const title = "COD world at war";
+  // const ratingUser = 4;
+  // const releaseDate = "I dont know ";
+  // const userId = "c3GkyGJIr4NeQpl6816Pp9sC9oI3";
+
+  // saveGame({ title, ratingUser, releaseDate }, userId);
+
+  //---------------------------------------------------------------------------
   // const adminUser = {
   //   email: "admin@admin.com",
   //   password: "admin123",

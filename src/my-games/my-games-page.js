@@ -4,13 +4,13 @@ import { useHistory } from "react-router-dom";
 import "./game-list.css";
 // import TestPage from "../test/test-page";
 
-function MyGamesPage() {
+function MyGamesPage(props) {
   const history = useHistory();
 
   return (
     <div>
       <h1>My Games 🎲</h1>
-      <GameList />
+      <GameList {...props} />
       <button
         className="game__button_new"
         onClick={() => history.push(`/all-games`)}

@@ -4,10 +4,56 @@ import { useLocalStorage } from "react-use";
 import { Delete } from "@material-ui/icons";
 
 import "./game-list.css";
+import useFsAllGames from "../custom-hooks/use-fs-all-games";
 
-function GameList() {
+function GameList(props) {
+  const userId = props.user.uid;
   const [items, setItems] = useLocalStorage("items", []);
+
+  const [games, isLoading, errorMessage] = useFsAllGames(userId);
+  // console.log(games.doc);
   let content;
+
+  const gameList_2 = games.map((gameDoc, i) => {
+    const gameData = gameDoc.data();
+    const title = gameData.name;
+    const releaseYear = gameData.released;
+    const image = gameData.background_image;
+    const rating = Math.round(gameData.rating);
+    const myRating = gameData.myRating;
+    const category = gameData.category;
+    const worldRatingString = "⭐".repeat(rating) + " ◽ ".repeat(5 - rating);
+    const ratingString = "⭐".repeat(myRating) + " ◽ ".repeat(5 - myRating);
+
+    console.log(title);
+
+    const onDeleteClick = () => {
+      items.splice(i, 1);
+      const oops = items;
+      setItems(oops);
+    };
+
+    return (
+      <li className="" key={title}>
+        <h2 className="">
+          {i + 1}. {title}
+        </h2>
+        <img id={title} src={image} alt={title} height="250"></img>
+        <p>Released: {releaseYear}</p>
+        <h3>Rating</h3>
+        <ul>
+          <li>World: {worldRatingString} </li>
+          <li>My rating: {ratingString} </li>
+        </ul>
+        <p>Currently: {category}</p>
+        <button className="game__button" onClick={onDeleteClick}>
+          <Delete />
+        </button>
+
+        <p>-----------------------------</p>
+      </li>
+    );
+  });
 
   // console.log(items[0][0].name);
 
@@ -21,7 +67,7 @@ function GameList() {
     const ratingString = "⭐".repeat(myRating) + " ◽ ".repeat(5 - myRating);
     const category = items[i][0].playerCategory;
 
-    console.log(myRating);
+    // console.log(myRating);
 
     const onDeleteClick = () => {
       items.splice(i, 1);
@@ -60,7 +106,7 @@ function GameList() {
       </div>
     );
   } else {
-    content = <ul className="game-list">{dataList}</ul>;
+    content = <ul className="game-list">{gameList_2}</ul>;
   }
   return <div className="game-container">{content}</div>;
 }
